@@ -11,7 +11,7 @@ class MyApp : MyApplication() {
             instance = this
         }
         // Initialize Application Lifecycle Manager
-        ApplicationLifecycleManager.getInstance().initialize(this)
+//        ApplicationLifecycleManager.getInstance().initialize(this)
     }
 
 

@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "monetization"
+rootProject.name = "chirag_monetization"
 include(":app")
 include(":googleAds")

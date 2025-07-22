@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation ("androidx.lifecycle:lifecycle-process:2.8.3")
+    implementation ("androidx.lifecycle:lifecycle-process:2.9.2")
     implementation ("androidx.multidex:multidex:2.0.1")
 
     implementation ("com.google.android.gms:play-services-ads:24.4.0")

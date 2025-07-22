@@ -12,6 +12,7 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.chirag.googleads.adsUtil.AppOpenAdManager
 import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
+import com.chirag.googleads.base.ApplicationLifecycleManager
 import com.chirag.googleads.localcache.PreferenceManager
 
 /** Application class that initializes, loads and show ads when activities change states. */
@@ -25,7 +26,7 @@ open class MyApplication :
         super<Application>.onCreate()
         MultiDex.install(this@MyApplication)
         registerActivityLifecycleCallbacks(this)
-
+        ApplicationLifecycleManager.getInstance().initialize(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         appOpenAdManager = AppOpenAdManager(this@MyApplication)
 
