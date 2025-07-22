@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">monetization</string>
+
+    <!--All test id's Admob-->
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner_ad_id" translatable="false">ca-app-pub-3940256099942544/9214589741</string>
+    <string name="admob_interstitial_ad_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_native_ad_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admob_rewarded_ad_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admob_rewarded_interstitial_ad_id" translatable="false">ca-app-pub-3940256099942544/5354046379</string>
+    <string name="admob_app_open_ad_id" translatable="false">ca-app-pub-3940256099942544/9257395921</string>
+</resources>
