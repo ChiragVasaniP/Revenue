@@ -109,7 +109,7 @@ fun oneOffClickable(
 fun MyScreen() {
     val context =LocalContext.current
 
-    Column() {
+    Column {
         Button(modifier = Modifier.oneAdClickable {
 
         }, onClick = {}) {

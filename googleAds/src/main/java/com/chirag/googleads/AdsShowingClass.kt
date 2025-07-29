@@ -7,6 +7,7 @@ import androidx.annotation.Keep
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.chirag.googleads.adsUtil.*
+import com.chirag.googleads.adsUtil.banner.BannerAdsUtil
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.rewarded.RewardItem

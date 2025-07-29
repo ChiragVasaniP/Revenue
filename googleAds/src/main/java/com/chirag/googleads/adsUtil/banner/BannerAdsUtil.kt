@@ -1,4 +1,4 @@
-package com.chirag.googleads.adsUtil
+package com.chirag.googleads.adsUtil.banner
 
 import android.app.Activity
 import android.util.Log
@@ -9,7 +9,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.RequestConfiguration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,7 +45,7 @@ internal object BannerAdsUtil {
             // Run UI-related actions on the main thread
             activity.runOnUiThread {
                 val adView = AdView(activity).apply {
-                    adUnitId = BANNER_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?:LocalAdPrefHelper.getBannerAdId()
+                    adUnitId = BANNER_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?: LocalAdPrefHelper.getBannerAdId()
                     setAdSize(
                         AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
                             activity, adWidthPx

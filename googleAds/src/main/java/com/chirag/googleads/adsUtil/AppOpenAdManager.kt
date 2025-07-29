@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
+import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.consent.GoogleMobileAdsConsentManager
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.AdError
@@ -119,7 +120,9 @@ internal class AppOpenAdManager(applicationContext: Context) {
             },
         )
     }
-
+    private fun canShowAds(activity: Activity): Boolean {
+        return LocalAdPrefHelper.isAdsEnabled(activity = activity) && AdConsentUtil.canRequestAds(activity)
+    }
     /**
      * Show the ad if one isn't already showing.
      *
@@ -130,6 +133,12 @@ internal class AppOpenAdManager(applicationContext: Context) {
         // If the app open ad is already showing, do not show the ad again.
         if (isShowingAd) {
             Log.d(LOG_TAG, "The app open ad is already showing.")
+            return
+        }
+
+        if (canShowAds(activity).not()){
+            Log.d(LOG_TAG, "The app open ad is not ready yet Or condition.")
+            onShowAdCompleteListener.onShowAdComplete()
             return
         }
 

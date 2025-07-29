@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.Keep
 import com.chirag.googleads.adsUtil.AdvanceNativeAdsUtil
-import com.chirag.googleads.adsUtil.BannerAdsUtil
+import com.chirag.googleads.adsUtil.banner.BannerAdsUtil
 import com.chirag.googleads.adsUtil.InterstitialAdUtil
 import com.chirag.googleads.adsUtil.RewardedAdUtil
 import com.chirag.googleads.adsUtil.RewardedInterstitialAdUtil
