@@ -1,6 +1,9 @@
 <resources>
     <string name="ad_attribution" translatable="false">Ad</string>
 
+    <string name="ad_loading">Preparing your advertisement\nOne moment please</string>
+
+
     <!--All test id's Admob-->
     <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="admob_banner_ad_id" translatable="false">ca-app-pub-3940256099942544/9214589741</string>

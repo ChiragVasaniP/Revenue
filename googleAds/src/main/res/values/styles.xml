@@ -12,5 +12,10 @@
         <item name="android:height">15dp</item>
     </style>
 
-
+    <!-- Add to your styles.xml -->
+    <style name="RoundedDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="dialogCornerRadius">16dp</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>
