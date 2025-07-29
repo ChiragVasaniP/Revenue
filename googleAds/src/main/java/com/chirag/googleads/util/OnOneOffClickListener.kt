@@ -36,7 +36,7 @@ abstract class OnOneOffClickListener(val activity: Activity) : View.OnClickListe
         }
 
         val context = view.context
-
+        AdProgressManager.showAdLoadingDialog(activity)
         if (LocalAdPrefHelper.getOnClickCounterAd(5) == interStillCounter) {
             interStillCounter = 1
 

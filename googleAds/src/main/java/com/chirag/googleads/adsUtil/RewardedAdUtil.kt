@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
-import com.chirag.googleads.util.AdProgressManager
+//import com.chirag.googleads.util.AdProgressManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
@@ -40,7 +40,7 @@ internal object RewardedAdUtil {
 
         isLoading = true
         val adRequest = AdRequest.Builder().build()
-        AdProgressManager.showAdLoadingDialog(activity)
+//        AdProgressManager.showAdLoadingDialog(activity)
 
         RewardedAd.load(
             activity,
@@ -54,13 +54,13 @@ internal object RewardedAdUtil {
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
                             Log.d(TAG, "Ad was dismissed.")
-                            AdProgressManager.dismissDialog()
+//                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                             Log.e(TAG, "Ad failed to show: ${adError.message}")
-                            AdProgressManager.dismissDialog()
+//                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
@@ -90,7 +90,7 @@ internal object RewardedAdUtil {
                     Log.e(TAG, "Ad failed to load: ${adError.message}")
                     isLoading = false
                     if (BuildConfig.DEBUG) Toast.makeText(activity, "Rewarded ad failed to load.", Toast.LENGTH_SHORT).show()
-                    AdProgressManager.dismissDialog()
+//                    AdProgressManager.dismissDialog()
                     onAdClosed()
                 }
             }

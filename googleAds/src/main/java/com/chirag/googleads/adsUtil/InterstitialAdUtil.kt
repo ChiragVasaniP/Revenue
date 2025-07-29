@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
-import com.chirag.googleads.util.AdProgressManager
+//import com.chirag.googleads.util.AdProgressManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -133,7 +133,7 @@ internal object InterstitialAdUtil {
 
         isAdLoading = true
         val adRequest = AdRequest.Builder().build()
-        AdProgressManager.showAdLoadingDialog(activity)
+//        AdProgressManager.showAdLoadingDialog(activity)
         InterstitialAd.load(
             activity,
             INTERSTITIAL_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?:LocalAdPrefHelper.getInterstitialAdId(
@@ -149,14 +149,14 @@ internal object InterstitialAdUtil {
                         override fun onAdDismissedFullScreenContent() {
                             Log.d(TAG, "Ad dismissed.")
                             interstitialAd = null
-                            AdProgressManager.dismissDialog()
+//                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                             Log.w(TAG, "Ad failed to show: ${adError.message}")
                             interstitialAd = null
-                            AdProgressManager.dismissDialog()
+//                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
@@ -181,7 +181,7 @@ internal object InterstitialAdUtil {
                     interstitialAd = null
                     isAdLoading = false
                     if (BuildConfig.DEBUG) Toast.makeText(activity, "Ad failed: ${adError.message}", Toast.LENGTH_SHORT).show()
-                    AdProgressManager.dismissDialog()
+//                    AdProgressManager.dismissDialog()
                     onAdClosed()
                 }
             }

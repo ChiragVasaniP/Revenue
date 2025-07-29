@@ -2,6 +2,9 @@ package com.chirag.googleads.util
 
 import android.app.Activity
 import android.content.ContextWrapper
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
@@ -15,6 +18,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import com.chirag.googleads.AdsShowingClass
+import com.chirag.googleads.LifecycleAwareAdsDemoActivity
+import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.localcache.CLICK_TYPE
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import kotlinx.coroutines.delay
@@ -48,8 +53,11 @@ fun oneOffClickable(
     var lastClickTime by remember { mutableStateOf(0L) }
     var interStillCounter by remember { mutableStateOf(1L) }
     var isViewClicked by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
+
+    LoadingProgressDialog(isLoading)
 
     return {
         val currentClickTime = SystemClock.uptimeMillis()
@@ -74,29 +82,39 @@ fun oneOffClickable(
 
             if (interStillCounter >= maxClick.toLong()) {
                 interStillCounter = 1
-
+                isLoading =true
                 when (LocalAdPrefHelper.getClickAdType(CLICK_TYPE.INTERSTITIAL.nameValue)) {
                     CLICK_TYPE.REWARD.nameValue -> {
                         AdsShowingClass.showRewardAds(
                             activity = mActivity,
-                            onRewardEarned = {},
-                            onAdClosed = { onClick() }
+                            onRewardEarned = {
+                                isLoading =false
+                            },
+                            onAdClosed = {
+                                isLoading =false
+                                onClick()
+                            }
                         )
                     }
                     CLICK_TYPE.INTERSTITIAL.nameValue -> {
                         AdsShowingClass.showInterstitialAd(
                             activity = mActivity,
-                            onAdClosed = { onClick() }
+                            onAdClosed = {
+                                isLoading =false
+                                onClick()
+                            }
                         )
                     }
                     else -> {
                         Log.d("Click", "Actual click logic else")
+                        isLoading =false
                         onClick()
                     }
                 }
             } else {
                 interStillCounter++
                 Log.d("Click", "Actual click logic interStillCounter")
+                isLoading =false
                 onClick()
             }
         }
@@ -109,6 +127,26 @@ fun oneOffClickable(
 fun MyScreen() {
     val context =LocalContext.current
 
+    getCurrentActivity()?.let {activity ->
+        AdConsentUtil.gatherConsent(activity) { aBoolean: Boolean? ->
+            AdConsentUtil.loadOpenAppAds(activity)
+            if (AdConsentUtil.canRequestAds(activity)) {
+                Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
+                    override fun run() {
+//                        AdConsentUtil.showAdIfAvailableAndThen(activity) {
+//                            startActivity(
+//                                Intent(
+//                                    activity,
+//                                    LifecycleAwareAdsDemoActivity::class.java
+//                                )
+//                            )
+//                            finish()
+//                        }
+                    }
+                }, 8000)
+            }
+        }
+    }
     Column {
         Button(modifier = Modifier.oneAdClickable {
 
