@@ -54,13 +54,12 @@ fun BannerAd(
     modifier: Modifier = Modifier,
     adWidthPx: Int = 360,
     alignment: Alignment = Alignment.Center,
-    adUnitId: String = TEST_BANNER_AD_UNIT_ID
 ) {
     val context = LocalContext.current
     getCurrentActivity()?.let { if (!canShowAds(it)) return }
 
     val isInPreview = LocalInspectionMode.current
-    val effectiveAdUnitId = if (BuildConfig.DEBUG) TEST_BANNER_AD_UNIT_ID else adUnitId
+    val effectiveAdUnitId = if (BuildConfig.DEBUG) TEST_BANNER_AD_UNIT_ID else LocalAdPrefHelper.getBannerAdId()
 
     // Initialize MobileAds in a LaunchedEffect
     LaunchedEffect(Unit) {
