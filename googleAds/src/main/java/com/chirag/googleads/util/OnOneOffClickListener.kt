@@ -43,12 +43,14 @@ abstract class OnOneOffClickListener(val activity: Activity) : View.OnClickListe
             when (LocalAdPrefHelper.getClickAdType(CLICK_TYPE.INTERSTITIAL.nameValue)) {
                 CLICK_TYPE.REWARD.nameValue -> {
                     AdsShowingClass.showRewardAds(activity = activity,{}){
+                        AdProgressManager.dismissDialog()
                         onSingleClick(view)
                     }
                 }
 
                 CLICK_TYPE.INTERSTITIAL.nameValue -> {
                     AdsShowingClass.showInterstitialAd(activity = activity){
+                        AdProgressManager.dismissDialog()
                         onSingleClick(view)
                     }
 
@@ -57,11 +59,13 @@ abstract class OnOneOffClickListener(val activity: Activity) : View.OnClickListe
 
                 }*/
                 else -> {
+                    AdProgressManager.dismissDialog()
                     onSingleClick(view)
                 }
             }
         } else {
             interStillCounter++
+            AdProgressManager.dismissDialog()
             onSingleClick(view)
         }
     }

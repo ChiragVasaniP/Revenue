@@ -3,12 +3,14 @@ package com.chirag.googleads
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.chirag.googleads.util.OnOneOffClickListener
 import com.google.android.gms.ads.rewarded.RewardItem
 
 /**
@@ -80,13 +82,26 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
             setOnClickListener { showRewardedAd() }
         }
         buttonContainer.addView(rewardedButton)
-        
+
+        val customClickButton = Button(this).apply {
+            text = "Custom Click Button"
+            setOnClickListener(object : OnOneOffClickListener(this@LifecycleAwareAdsDemoActivity) {
+                override fun onSingleClick(v: View) {
+//                    TODO("Not yet implemented")
+                }
+            })
+        }
+        buttonContainer.addView(customClickButton)
+
         // Clear Log Button
         val clearButton = Button(this).apply {
             text = "Clear Log"
             setOnClickListener { clearEventLog() }
         }
+
         buttonContainer.addView(clearButton)
+
+
     }
     
     private fun initializeAdsManager() {

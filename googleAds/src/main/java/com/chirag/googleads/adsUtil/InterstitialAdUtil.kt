@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
+import com.chirag.googleads.util.AdProgressManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -55,7 +56,7 @@ internal object InterstitialAdUtil {
                     Log.e(TAG, "Interstitial ad failed to load: ${adError.message}")
                     interstitialAd = null
                     isAdLoading = false
-                    Toast.makeText(
+                    if (BuildConfig.DEBUG) Toast.makeText(
                         activity,
                         "Ad failed to load: ${adError.message}",
                         Toast.LENGTH_SHORT
@@ -132,7 +133,7 @@ internal object InterstitialAdUtil {
 
         isAdLoading = true
         val adRequest = AdRequest.Builder().build()
-
+        AdProgressManager.showAdLoadingDialog(activity)
         InterstitialAd.load(
             activity,
             INTERSTITIAL_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?:LocalAdPrefHelper.getInterstitialAdId(
@@ -148,12 +149,14 @@ internal object InterstitialAdUtil {
                         override fun onAdDismissedFullScreenContent() {
                             Log.d(TAG, "Ad dismissed.")
                             interstitialAd = null
+                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                             Log.w(TAG, "Ad failed to show: ${adError.message}")
                             interstitialAd = null
+                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
@@ -177,7 +180,8 @@ internal object InterstitialAdUtil {
                     Log.e(TAG, "Failed to load interstitial ad: ${adError.message}")
                     interstitialAd = null
                     isAdLoading = false
-                    Toast.makeText(activity, "Ad failed: ${adError.message}", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Toast.makeText(activity, "Ad failed: ${adError.message}", Toast.LENGTH_SHORT).show()
+                    AdProgressManager.dismissDialog()
                     onAdClosed()
                 }
             }
