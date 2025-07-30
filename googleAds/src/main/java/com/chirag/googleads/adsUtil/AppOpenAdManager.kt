@@ -50,7 +50,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
      *
      * @param context the context of the activity that loads the ad
      */
-    fun loadAd(context: Context) {
+    fun loadAd(context: Activity) {
         // Do not load ad if there is an unused ad or one is already loading.
         if (isLoadingAd || isAdAvailable()) {
             return
@@ -60,7 +60,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
         val request = AdRequest.Builder().build()
         AppOpenAd.load(
             context,
-            AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?:LocalAdPrefHelper.getAppOpenAdId(AD_UNIT_ID),
+            AD_UNIT_ID.takeIf { BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = context) }?:LocalAdPrefHelper.getAppOpenAdId(AD_UNIT_ID),
             request,
             object : AppOpenAdLoadCallback() {
                 /**

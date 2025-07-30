@@ -32,7 +32,7 @@ internal object AdvanceNativeAdsUtil {
         container: ViewGroup,
         startMuted: Boolean = true
     ) {
-        val builder = AdLoader.Builder(activity, NATIVE_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?: LocalAdPrefHelper.getNativeAdId(NATIVE_AD_UNIT_ID))
+        val builder = AdLoader.Builder(activity, NATIVE_AD_UNIT_ID.takeIf { BuildConfig.DEBUG  || LocalAdPrefHelper.getIsDebugAds(activity = activity)}?: LocalAdPrefHelper.getNativeAdId(NATIVE_AD_UNIT_ID))
 
         builder.forNativeAd { nativeAd ->
             if (activity.isFinishing || activity.isDestroyed) {

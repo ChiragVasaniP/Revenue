@@ -5,8 +5,10 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.MyApplication
 import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
+import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import kotlinx.coroutines.CoroutineScope
@@ -35,9 +37,11 @@ import java.util.concurrent.atomic.AtomicBoolean
     private fun initAdSdkIfNeeded(context: Context) {
         if (isInitialized.getAndSet(true)) return // Prevent re-initialization
         // Set test device IDs for debugging ads (optional)
+       val deviceTestId = listOf(MyApplication.TEST_DEVICE_HASHED_ID).takeIf { BuildConfig.DEBUG }?: LocalAdPrefHelper.getTestDeviceIds()
+
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
-                .setTestDeviceIds(listOf(MyApplication.TEST_DEVICE_HASHED_ID))
+                .setTestDeviceIds(deviceTestId)
                 .build()
         )
 
@@ -46,7 +50,7 @@ import java.util.concurrent.atomic.AtomicBoolean
         Log.d("AdUtil", "Ad SDK initialized.")
     }
 
-    fun loadOpenAppAds(context: Context){
+    fun loadOpenAppAds(context: Activity){
         // Initialize Mobile Ads SDK on a background thread
         if (canRequestAds(context)){
             CoroutineScope(Dispatchers.Main).launch {

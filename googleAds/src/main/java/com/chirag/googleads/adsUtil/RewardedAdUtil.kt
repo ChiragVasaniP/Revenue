@@ -44,7 +44,7 @@ internal object RewardedAdUtil {
 
         RewardedAd.load(
             activity,
-            REWARD_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?:LocalAdPrefHelper.getRewardedAdId(REWARD_AD_UNIT_ID),
+            REWARD_AD_UNIT_ID.takeIf { BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = activity) }?:LocalAdPrefHelper.getRewardedAdId(REWARD_AD_UNIT_ID),
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {

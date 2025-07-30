@@ -59,7 +59,7 @@ fun BannerAd(
     getCurrentActivity()?.let { if (!canShowAds(it)) return }
 
     val isInPreview = LocalInspectionMode.current
-    val effectiveAdUnitId = if (BuildConfig.DEBUG) TEST_BANNER_AD_UNIT_ID else LocalAdPrefHelper.getBannerAdId()
+    val effectiveAdUnitId = if (BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = getCurrentActivity()?:return)) TEST_BANNER_AD_UNIT_ID else LocalAdPrefHelper.getBannerAdId()
 
     // Initialize MobileAds in a LaunchedEffect
     LaunchedEffect(Unit) {

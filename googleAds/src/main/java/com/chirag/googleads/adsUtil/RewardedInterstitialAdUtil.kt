@@ -41,7 +41,7 @@ internal object RewardedInterstitialAdUtil {
         val adRequest = AdRequest.Builder().build()
         RewardedInterstitialAd.load(
             activity,
-            REWARD_INT_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?:LocalAdPrefHelper.getRewardedInterstitialAdId(REWARD_INT_AD_UNIT_ID),
+            REWARD_INT_AD_UNIT_ID.takeIf { BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = activity)}?:LocalAdPrefHelper.getRewardedInterstitialAdId(REWARD_INT_AD_UNIT_ID),
             adRequest,
             object : RewardedInterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedInterstitialAd) {

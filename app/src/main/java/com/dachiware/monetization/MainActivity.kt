@@ -61,5 +61,10 @@ class MainActivity : AppCompatActivity() {
         LocalAdPrefHelper.setPlayConsoleAppVersionCode(0)
         LocalAdPrefHelper.setOnClickCounterAd(1)
         LocalAdPrefHelper.setClickAdType(CLICK_TYPE.INTERSTITIAL.nameValue)
+
+//        Enable Debug Ad's
+        LocalAdPrefHelper.setIsDebugAds(true)
+        LocalAdPrefHelper.setDebugAppVersion(BuildConfig.VERSION_CODE.toLong())
+        LocalAdPrefHelper.setTestDeviceIds("94E478E0C133848F5605B6D42EE2640D")
     }
 }

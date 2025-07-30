@@ -3,9 +3,6 @@ package com.chirag.googleads.localcache
 import android.app.Activity
 import android.content.Context
 import android.os.Build
-import android.util.Log
-import androidx.core.util.LogWriter
-import com.chirag.googleads.R
 
 
 object LocalAdPrefHelper {
@@ -23,6 +20,10 @@ object LocalAdPrefHelper {
     private const val KEY_PLAY_CONSOLE_APP_VERSION_CODE = "play_console_app_version_code"
     private const val KEY_AD_CLICK_COUNTER = "ad_click_counter"
     private const val KEY_CLICK_AD_TYPE = "ad_click_type"
+    private const val KEY_IS_DEBUG_ADS = "is_debug_ads"
+    private const val KEY_DEBUG_APP_VERSION = "debug_app_version"
+    private const val KEY_TEST_DEVICE_IDS = "test_device_ids"
+
     private const val KEY_IS_MUTE_AD = "is_mute_ad"
 
     fun ifPrefManagerCrash(context: Context) {
@@ -88,18 +89,26 @@ object LocalAdPrefHelper {
         PreferenceManager.putBoolean(KEY_IS_ADS_ENABLED, enabled)
     }
 
+    internal fun getAdsEnabled(default: Boolean = true): Boolean {
+        return PreferenceManager.getBoolean(KEY_IS_ADS_ENABLED, default)
+
+    }
+
+    fun setPlayConsoleAppVersionCode(longVersionCode: Long) {
+        PreferenceManager.putLong(KEY_PLAY_CONSOLE_APP_VERSION_CODE, longVersionCode)
+    }
+
+    internal fun getPlayConsoleAppVersionCode(default: Long = 0): Long {
+        return PreferenceManager.getLong(KEY_PLAY_CONSOLE_APP_VERSION_CODE, default)
+    }
+
     internal fun isAdsEnabled(default: Boolean = true, activity: Activity): Boolean {
         // Return true if activity is from the module
         if (isActivityFromModule(activity)) {
             return true
         }
         
-        return PreferenceManager.getBoolean(
-            KEY_IS_ADS_ENABLED,
-            default
-        ) && PreferenceManager.getLong(KEY_PLAY_CONSOLE_APP_VERSION_CODE, 0) != getAppVersionCode(
-            activity
-        )
+        return getAdsEnabled(default) && getPlayConsoleAppVersionCode() != getAppVersionCode(activity)
     }
     
     /**
@@ -112,22 +121,7 @@ object LocalAdPrefHelper {
     }
 
 
-    private fun getAppVersionCode(activity: Activity): Long {
-        val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            activity.packageManager.getPackageInfo(activity.packageName, 0).longVersionCode
-        } else {
-            activity.packageManager.getPackageInfo(activity.packageName, 0).versionCode.toLong()
-        }
-        return versionCode
-    }
 
-    fun setPlayConsoleAppVersionCode(longVersionCode: Long) {
-        PreferenceManager.putLong(KEY_PLAY_CONSOLE_APP_VERSION_CODE, longVersionCode)
-    }
-
-    internal fun getPlayConsoleAppVersionCode(default: Long = 0): Long {
-        return PreferenceManager.getLong(KEY_PLAY_CONSOLE_APP_VERSION_CODE, default)
-    }
 
 
     fun setOnClickCounterAd(clickCounter: Long) {
@@ -145,6 +139,48 @@ object LocalAdPrefHelper {
     internal fun getClickAdType(default: String = CLICK_TYPE.NOUN.nameValue): String {
         return PreferenceManager.getString(KEY_CLICK_AD_TYPE, default)
     }
+
+    fun setTestDeviceIds(ids: String) {
+        PreferenceManager.putString(KEY_TEST_DEVICE_IDS, ids)
+    }
+
+    fun setTestDeviceIdsList(ids: List<String>) {
+        setTestDeviceIds(ids.joinToString(","))
+    }
+
+    internal fun getTestDeviceIds(): List<String> {
+        val idsString = PreferenceManager.getString(KEY_TEST_DEVICE_IDS, "94E478E0C133848F5605B6D42EE2640D")
+        return idsString.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+    }
+
+    fun setIsDebugAds(isDebugAds: Boolean) {
+        PreferenceManager.putBoolean(KEY_IS_DEBUG_ADS, isDebugAds)
+    }
+
+    fun setDebugAppVersion(debugVersionCode: Long) {
+        PreferenceManager.putLong(KEY_DEBUG_APP_VERSION, debugVersionCode)
+    }
+
+    internal fun getDebugAppVersion(default: Long = 0): Long {
+        return PreferenceManager.getLong(KEY_DEBUG_APP_VERSION, default)
+    }
+
+
+    internal fun getIsDebugAds(isDebugAds: Boolean = false,activity: Activity): Boolean {
+        return PreferenceManager.getBoolean(KEY_IS_DEBUG_ADS, isDebugAds) &&
+                getDebugAppVersion() == getAppVersionCode(activity)
+    }
+
+
+    private fun getAppVersionCode(activity: Activity): Long {
+        val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            activity.packageManager.getPackageInfo(activity.packageName, 0).longVersionCode
+        } else {
+            activity.packageManager.getPackageInfo(activity.packageName, 0).versionCode.toLong()
+        }
+        return versionCode
+    }
+
 
     // Clear all ad keys
     fun clearAdPreferences() {

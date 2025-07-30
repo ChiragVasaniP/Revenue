@@ -94,7 +94,7 @@ open class MyApplication :
      *
      * @param activity the activity that shows the app open ad
      */
-    fun loadAd(context: Context) {
+    fun loadAd(context: Activity) {
         // We wrap the loadAd to enforce that other classes only interact with MyApplication
         // class.
         appOpenAdManager.loadAd(context)
@@ -109,6 +109,6 @@ open class MyApplication :
         // to get test ads on this device" or
         // "Use new ConsentDebugSettings.Builder().addTestDeviceHashedId("ABCDEF012345") to set this as
         // a debug device".
-        const val TEST_DEVICE_HASHED_ID = "ABCDEF012345"
+        const val TEST_DEVICE_HASHED_ID = "94E478E0C133848F5605B6D42EE2640D"
     }
 }

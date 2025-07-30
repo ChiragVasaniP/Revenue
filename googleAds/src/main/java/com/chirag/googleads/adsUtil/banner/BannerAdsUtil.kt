@@ -45,7 +45,7 @@ internal object BannerAdsUtil {
             // Run UI-related actions on the main thread
             activity.runOnUiThread {
                 val adView = AdView(activity).apply {
-                    adUnitId = BANNER_AD_UNIT_ID.takeIf { BuildConfig.DEBUG }?: LocalAdPrefHelper.getBannerAdId()
+                    adUnitId = BANNER_AD_UNIT_ID.takeIf { BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = activity) }?: LocalAdPrefHelper.getBannerAdId()
                     setAdSize(
                         AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
                             activity, adWidthPx
