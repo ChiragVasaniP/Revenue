@@ -22,9 +22,13 @@ import com.chirag.googleads.LifecycleAwareAdsDemoActivity
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.localcache.CLICK_TYPE
 import com.chirag.googleads.localcache.LocalAdPrefHelper
+import com.chirag.googleads.util.GlobalClickTracker.interStillCounter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+internal object GlobalClickTracker {
+    var interStillCounter: Long = 1L
+}
 
 
 @Composable
@@ -51,7 +55,7 @@ fun oneOffClickable(
     onClick: () -> Unit
 ): () -> Unit {
     var lastClickTime by remember { mutableStateOf(0L) }
-    var interStillCounter by remember { mutableStateOf(1L) }
+//    var interStillCounter by remember { mutableStateOf(1L) }
     var isViewClicked by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }
 

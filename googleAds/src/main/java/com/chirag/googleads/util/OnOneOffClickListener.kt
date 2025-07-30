@@ -14,8 +14,8 @@ abstract class OnOneOffClickListener(val activity: Activity) : View.OnClickListe
 
     companion object {
         private const val MIN_CLICK_INTERVAL = 1000L
-        var isViewClicked = false
-        var interStillCounter =0L
+        private var isViewClicked = false
+        private var interStillCounter = 0L
     }
 
     private var mLastClickTime: Long = 0
