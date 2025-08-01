@@ -2,7 +2,14 @@ package com.chirag.googleads.localcache
 
 import android.app.Activity
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
+import java.io.IOException
+import java.net.InetSocketAddress
+import java.net.Socket
+import java.util.concurrent.Executors
 
 
 object LocalAdPrefHelper {
@@ -104,24 +111,29 @@ object LocalAdPrefHelper {
 
     internal fun isAdsEnabled(default: Boolean = true, activity: Activity): Boolean {
         // Return true if activity is from the module
+
+        if (isInternetAvailable(activity).not()) {
+            Log.e("TAG_Localdata", "isAdsEnabled:  isInternetAvailabl  eNot Availble ")
+            return false
+        }
+
         if (isActivityFromModule(activity)) {
             return true
         }
-        
-        return getAdsEnabled(default) && getPlayConsoleAppVersionCode() != getAppVersionCode(activity)
+
+        return getAdsEnabled(default) && getPlayConsoleAppVersionCode() != getAppVersionCode(
+            activity
+        )
     }
-    
+
     /**
      * Check if the activity is from the Google Ads module
      */
     private fun isActivityFromModule(activity: Activity): Boolean {
         val modulePackageName = "com.chirag.googleads"
         return activity.javaClass.`package`?.name?.startsWith(modulePackageName) == true ||
-               activity.javaClass.name.startsWith(modulePackageName)
+                activity.javaClass.name.startsWith(modulePackageName)
     }
-
-
-
 
 
     fun setOnClickCounterAd(clickCounter: Long) {
@@ -149,7 +161,8 @@ object LocalAdPrefHelper {
     }
 
     internal fun getTestDeviceIds(): List<String> {
-        val idsString = PreferenceManager.getString(KEY_TEST_DEVICE_IDS, "94E478E0C133848F5605B6D42EE2640D")
+        val idsString =
+            PreferenceManager.getString(KEY_TEST_DEVICE_IDS, "94E478E0C133848F5605B6D42EE2640D")
         return idsString.split(",").map { it.trim() }.filter { it.isNotEmpty() }
     }
 
@@ -166,7 +179,7 @@ object LocalAdPrefHelper {
     }
 
 
-    internal fun getIsDebugAds(isDebugAds: Boolean = false,activity: Activity): Boolean {
+    internal fun getIsDebugAds(isDebugAds: Boolean = false, activity: Activity): Boolean {
         return PreferenceManager.getBoolean(KEY_IS_DEBUG_ADS, isDebugAds) &&
                 getDebugAppVersion() == getAppVersionCode(activity)
     }
@@ -190,6 +203,57 @@ object LocalAdPrefHelper {
         PreferenceManager.remove(KEY_GOOGLE_REWARDED_AD_ID)
         PreferenceManager.remove(KEY_IS_ADS_ENABLED)
     }
+
+
+    fun isInternetAvailable(context: Context, timeoutMs: Int = 3000): Boolean {
+        if (!isNetworkAvailable(context)) return false
+
+        val executor = Executors.newSingleThreadExecutor()
+        val future = executor.submit<Boolean> {
+            try {
+                Socket().use { socket ->
+                    socket.connect(InetSocketAddress("8.8.8.8", 53), timeoutMs)
+                    true
+                }
+            } catch (e: IOException) {
+                false
+            }
+        }
+
+        return try {
+            future.get() // Waits for the result (blocking, but runs in background)
+        } catch (e: Exception) {
+            false
+        } finally {
+            executor.shutdown()
+        }
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // For Android 10 (API 29) and above
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        }
+        // For older versions
+        else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo
+            @Suppress("DEPRECATION")
+            return networkInfo != null && networkInfo.isConnected
+        }
+    }
+
 }
 
 enum class CLICK_TYPE(val nameValue: String) {
