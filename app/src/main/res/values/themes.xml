@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Monetization" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="customCardBackgroundColor">#FFFFFF</item>
+        <item name="customTextColor">#000000</item>
+        <item name="customProgressColor">#6200EE</item>
+        <item name="customTrackColor">#DDDDDD</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>

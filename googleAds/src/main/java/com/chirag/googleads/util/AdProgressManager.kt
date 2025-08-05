@@ -46,7 +46,7 @@ object AdProgressManager {
         binding.tvLoadingMessage.text = context.getString(R.string.ad_loading)
         binding.progressIndicator.isIndeterminate = true
 
-        loadingDialog = MaterialAlertDialogBuilder(context, R.style.RoundedDialogTheme)
+        loadingDialog = MaterialAlertDialogBuilder(context, R.style.Widget_MyApp_LoadingCard)
             .setView(binding.root)
             .setCancelable(false)
             .create()
