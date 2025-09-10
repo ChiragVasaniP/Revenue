@@ -12,6 +12,7 @@ import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.OnPaidEventListener
 import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
 import java.util.Date
@@ -70,6 +71,11 @@ internal class AppOpenAdManager(applicationContext: Context) {
                  */
                 override fun onAdLoaded(ad: AppOpenAd) {
                     appOpenAd = ad
+
+                    ad.onPaidEventListener = OnPaidEventListener {adValue ->
+                        Log.d(LOG_TAG, "AppOpen onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                    }
+
                     isLoadingAd = false
                     loadTime = Date().time
                     Log.d(LOG_TAG, "onAdLoaded.")

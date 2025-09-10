@@ -51,6 +51,10 @@ internal object RewardedAdUtil {
                     Log.d(TAG, "Rewarded ad loaded.")
                     isLoading = false
 
+                    ad.onPaidEventListener = OnPaidEventListener {adValue ->
+                        Log.d(TAG, "Reward onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                    }
+
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
                             Log.d(TAG, "Ad was dismissed.")

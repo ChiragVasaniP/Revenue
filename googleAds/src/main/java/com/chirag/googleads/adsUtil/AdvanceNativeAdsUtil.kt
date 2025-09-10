@@ -39,10 +39,15 @@ internal object AdvanceNativeAdsUtil {
                 nativeAd.destroy()
                 return@forNativeAd
             }
+            nativeAd.setOnPaidEventListener {adValue->
+                Log.d(TAG, "forNativeAd onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+            }
 
             // Clean up previous ad if needed
             currentNativeAd?.destroy()
             currentNativeAd = nativeAd
+
+
 
             // Inflate layout and populate ad
             val adBinding = AdUnifiedBinding.inflate(LayoutInflater.from(activity))

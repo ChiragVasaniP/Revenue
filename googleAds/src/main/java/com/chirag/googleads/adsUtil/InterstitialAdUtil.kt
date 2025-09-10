@@ -47,6 +47,9 @@ internal object InterstitialAdUtil {
                 override fun onAdLoaded(ad: InterstitialAd) {
                     interstitialAd = ad
                     isAdLoading = false
+                    ad.onPaidEventListener = OnPaidEventListener {adValue ->
+                        Log.d(TAG, "Interstitial onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                    }
                     Log.d(TAG, "Interstitial ad loaded")
                     onLoaded?.invoke()
                 }
@@ -143,6 +146,10 @@ internal object InterstitialAdUtil {
                     Log.d(TAG, "Interstitial ad loaded")
                     isAdLoading = false
                     interstitialAd = ad
+
+                    ad.onPaidEventListener = OnPaidEventListener {adValue ->
+                        Log.d(TAG, "Interstitial onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                    }
 
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {

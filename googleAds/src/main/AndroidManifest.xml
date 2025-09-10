@@ -5,9 +5,20 @@
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
 
     <application android:name=".MyApplication">
+
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <!--
+        Override Meta data value with your own AdMob App ID Like below Examole
+
+           <meta-data
+                    android:name="com.google.android.gms.ads.APPLICATION_ID"
+                    android:value="@string/admob_app_id"
+                    tools:replace="android:value" />
+        -->
 
 
         <activity android:name=".LifecycleAwareAdsDemoActivity" />

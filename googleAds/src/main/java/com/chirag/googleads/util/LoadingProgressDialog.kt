@@ -3,6 +3,7 @@ package com.chirag.googleads.util
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,8 +44,7 @@ fun LoadingProgressDialog(
     val backgroundColor = if (isDarkTheme) Color(0xFF424242) else Color.White
     val contentColor = if (isDarkTheme) Color.White else Color.Black
     val progressColor = if (isDarkTheme) Color(0xFFBB86FC) else Color(0xFF6200EE)
-
-    if (isVisible) {
+    AnimatedVisibility(isVisible) {
         Dialog(
             onDismissRequest = { /* Prevent dismiss when touching outside */ },
             DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
@@ -69,6 +69,8 @@ fun LoadingProgressDialog(
             }
         }
     }
+
+
 }
 
 @ThemePreviews()

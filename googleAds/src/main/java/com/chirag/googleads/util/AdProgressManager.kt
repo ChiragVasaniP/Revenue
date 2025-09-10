@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 
 
-object AdProgressManager {
+internal object AdProgressManager {
     private var loadingDialog: Dialog? = null
 
     // ViewBinding class for our custom dialog layout
