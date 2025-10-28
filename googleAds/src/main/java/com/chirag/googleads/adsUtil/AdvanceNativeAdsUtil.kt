@@ -1,7 +1,7 @@
 package com.chirag.googleads.adsUtil
 
 import android.app.Activity
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -40,7 +40,7 @@ internal object AdvanceNativeAdsUtil {
                 return@forNativeAd
             }
             nativeAd.setOnPaidEventListener {adValue->
-                Log.d(TAG, "forNativeAd onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                Logger.d(TAG, "forNativeAd onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
             }
 
             // Clean up previous ad if needed
@@ -68,7 +68,7 @@ internal object AdvanceNativeAdsUtil {
 
         builder.withAdListener(object : AdListener() {
             override fun onAdFailedToLoad(error: LoadAdError) {
-                Log.e(TAG, "Native ad failed to load: ${error.message}")
+                Logger.e(TAG, "Native ad failed to load: ${error.message}")
                 Toast.makeText(activity, "Failed to load native ad.", Toast.LENGTH_SHORT).show()
             }
         })
@@ -138,7 +138,7 @@ internal object AdvanceNativeAdsUtil {
         nativeAd.mediaContent?.videoController?.let { vc ->
             vc.videoLifecycleCallbacks = object : VideoController.VideoLifecycleCallbacks() {
                 override fun onVideoEnd() {
-                    Log.d(TAG, "Video playback has ended.")
+                    Logger.d(TAG, "Video playback has ended.")
                     super.onVideoEnd()
                 }
             }

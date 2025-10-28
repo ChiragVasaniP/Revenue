@@ -2,7 +2,7 @@ package com.chirag.googleads.adsUtil
 
 
 import android.app.Activity
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
@@ -32,7 +32,7 @@ internal object RewardedInterstitialAdUtil {
         onAdClosed: () -> Unit
     ) {
         if (isAdLoading) {
-            Log.d(TAG, "Ad is already loading.")
+            Logger.d(TAG, "Ad is already loading.")
             return
         }
 
@@ -45,45 +45,45 @@ internal object RewardedInterstitialAdUtil {
             adRequest,
             object : RewardedInterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedInterstitialAd) {
-                    Log.d(TAG, "Rewarded Interstitial Ad Loaded.")
+                    Logger.d(TAG, "Rewarded Interstitial Ad Loaded.")
                     isAdLoading = false
 
                     ad.onPaidEventListener = OnPaidEventListener {adValue ->
-                        Log.d(TAG, "RewardedInterstitialAd onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                        Logger.d(TAG, "RewardedInterstitialAd onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
                     }
 
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
-                            Log.d(TAG, "Ad dismissed.")
+                            Logger.d(TAG, "Ad dismissed.")
                             onAdClosed()
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            Log.e(TAG, "Ad failed to show: ${adError.message}")
+                            Logger.e(TAG, "Ad failed to show: ${adError.message}")
                             onAdClosed()
                         }
 
                         override fun onAdShowedFullScreenContent() {
-                            Log.d(TAG, "Ad showed fullscreen content.")
+                            Logger.d(TAG, "Ad showed fullscreen content.")
                         }
 
                         override fun onAdClicked() {
-                            Log.d(TAG, "Ad clicked.")
+                            Logger.d(TAG, "Ad clicked.")
                         }
 
                         override fun onAdImpression() {
-                            Log.d(TAG, "Ad impression recorded.")
+                            Logger.d(TAG, "Ad impression recorded.")
                         }
                     }
 
                     ad.show(activity) { rewardItem ->
-                        Log.d(TAG, "User earned reward: ${rewardItem.amount} ${rewardItem.type}")
+                        Logger.d(TAG, "User earned reward: ${rewardItem.amount} ${rewardItem.type}")
                         onRewardEarned(rewardItem.amount, rewardItem.type)
                     }
                 }
 
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e(TAG, "Ad failed to load: ${adError.message}")
+                    Logger.e(TAG, "Ad failed to load: ${adError.message}")
                     isAdLoading = false
                     Toast.makeText(activity, "Ad failed to load.", Toast.LENGTH_SHORT).show()
                     onAdClosed()

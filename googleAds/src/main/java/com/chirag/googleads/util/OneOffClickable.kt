@@ -5,7 +5,7 @@ import android.content.ContextWrapper
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -85,7 +85,7 @@ fun oneOffClickable(
             }
 
             val maxClick = LocalAdPrefHelper.getOnClickCounterAd(5)
-            Log.d("ClickDebug", "interStillCounter: $interStillCounter, maxClick: $maxClick, elapsedTime: $elapsedTime, isViewClicked: $isViewClicked")
+            Logger.d("ClickDebug", "interStillCounter: $interStillCounter, maxClick: $maxClick, elapsedTime: $elapsedTime, isViewClicked: $isViewClicked")
 
             if (interStillCounter >= maxClick.toLong()) {
                 interStillCounter = 1
@@ -113,14 +113,14 @@ fun oneOffClickable(
                         )
                     }
                     else -> {
-                        Log.d("Click", "Actual click logic else")
+                        Logger.d("Click", "Actual click logic else")
                         isLoading =false
                         onClick()
                     }
                 }
             } else {
                 interStillCounter++
-                Log.d("Click", "Actual click logic interStillCounter")
+                Logger.d("Click", "Actual click logic interStillCounter")
                 isLoading =false
                 onClick()
             }

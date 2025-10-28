@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket
@@ -113,7 +113,7 @@ object LocalAdPrefHelper {
         // Return true if activity is from the module
 
         if (isInternetAvailable(activity).not()) {
-            Log.e("TAG_Localdata", "isAdsEnabled:  isInternetAvailabl  eNot Availble ")
+            Logger.e("TAG_Localdata", "isAdsEnabled:  isInternetAvailabl  eNot Availble ")
             return false
         }
 
@@ -130,7 +130,7 @@ object LocalAdPrefHelper {
      * Check if the activity is from the Google Ads module
      */
     private fun isActivityFromModule(activity: Activity): Boolean {
-        val modulePackageName = "com.chirag.googleads"
+        val modulePackageName = activity.applicationContext.packageName?: "com.chirag.googleads"
         return activity.javaClass.`package`?.name?.startsWith(modulePackageName) == true ||
                 activity.javaClass.name.startsWith(modulePackageName)
     }
@@ -192,6 +192,10 @@ object LocalAdPrefHelper {
             activity.packageManager.getPackageInfo(activity.packageName, 0).versionCode.toLong()
         }
         return versionCode
+    }
+
+    fun enableAdsLogging(isEnableLogs: Boolean=false){
+        Logger.isLoggingEnabled = isEnableLogs
     }
 
 

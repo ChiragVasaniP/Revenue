@@ -3,9 +3,9 @@ package com.chirag.googleads.base
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import com.chirag.googleads.util.Logger
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
@@ -45,18 +45,18 @@ class ApplicationLifecycleManager private constructor() {
      */
     fun initialize(application: Application) {
         if (isInitialized) {
-            Log.w("chirag_lifecycle_", "ApplicationLifecycleManager already initialized")
+            Logger.w("chirag_lifecycle_", "ApplicationLifecycleManager already initialized")
             return
         }
         
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(@NonNull activity: Activity, @Nullable savedInstanceState: Bundle?) {
-                Log.d("chirag_lifecycle_", "onActivityCreated: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivityCreated: ${activity.javaClass.name}")
                 notifyActivityCreated(activity)
             }
             
             override fun onActivityStarted(@NonNull activity: Activity) {
-                Log.d("chirag_lifecycle_", "onActivityStarted: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivityStarted: ${activity.javaClass.name}")
                 activityCount++
                 if (!isAppInForeground) {
                     isAppInForeground = true
@@ -66,17 +66,17 @@ class ApplicationLifecycleManager private constructor() {
             }
             
             override fun onActivityResumed(@NonNull activity: Activity) {
-                Log.d("chirag_lifecycle_", "onActivityResumed: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivityResumed: ${activity.javaClass.name}")
                 notifyActivityResumed(activity)
             }
             
             override fun onActivityPaused(@NonNull activity: Activity) {
-                Log.d("chirag_lifecycle_", "onActivityPaused: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivityPaused: ${activity.javaClass.name}")
                 notifyActivityPaused(activity)
             }
             
             override fun onActivityStopped(@NonNull activity: Activity) {
-                Log.d("chirag_lifecycle_", "onActivityStopped: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivityStopped: ${activity.javaClass.name}")
                 activityCount--
                 if (activityCount == 0) {
                     isAppInForeground = false
@@ -86,18 +86,18 @@ class ApplicationLifecycleManager private constructor() {
             }
             
             override fun onActivitySaveInstanceState(@NonNull activity: Activity, @NonNull outState: Bundle) {
-                Log.d("chirag_lifecycle_", "onActivitySaveInstanceState: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivitySaveInstanceState: ${activity.javaClass.name}")
                 notifyActivitySaveInstanceState(activity, outState)
             }
             
             override fun onActivityDestroyed(@NonNull activity: Activity) {
-                Log.d("chirag_lifecycle_", "onActivityDestroyed: ${activity.javaClass.name}")
+                Logger.d("chirag_lifecycle_", "onActivityDestroyed: ${activity.javaClass.name}")
                 notifyActivityDestroyed(activity)
             }
         })
         
         isInitialized = true
-        Log.i("chirag_lifecycle_", "ApplicationLifecycleManager initialized successfully")
+        Logger.i("chirag_lifecycle_", "ApplicationLifecycleManager initialized successfully")
     }
     
     /**
@@ -106,7 +106,7 @@ class ApplicationLifecycleManager private constructor() {
     fun registerLifecycleListener(listener: ApplicationLifecycleListener) {
         if (listener != null && !lifecycleListeners.contains(listener)) {
             lifecycleListeners.add(listener)
-            Log.d(TAG, "Registered lifecycle listener: ${listener.javaClass.simpleName}")
+            Logger.d(TAG, "Registered lifecycle listener: ${listener.javaClass.simpleName}")
         }
     }
     
@@ -116,7 +116,7 @@ class ApplicationLifecycleManager private constructor() {
     fun unregisterLifecycleListener(listener: ApplicationLifecycleListener) {
         if (listener != null) {
             lifecycleListeners.remove(listener)
-            Log.d(TAG, "Unregistered lifecycle listener: ${listener.javaClass.simpleName}")
+            Logger.d(TAG, "Unregistered lifecycle listener: ${listener.javaClass.simpleName}")
         }
     }
     
@@ -137,23 +137,23 @@ class ApplicationLifecycleManager private constructor() {
     
     // Notification methods
     private fun notifyAppStarted() {
-        Log.d(TAG, "App started - notifying ${lifecycleListeners.size} listeners")
+        Logger.d(TAG, "App started - notifying ${lifecycleListeners.size} listeners")
         for (listener in lifecycleListeners) {
             try {
                 listener.onAppStarted()
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onAppStarted for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onAppStarted for ${listener.javaClass.simpleName}", e)
             }
         }
     }
     
     private fun notifyAppStopped() {
-        Log.d(TAG, "App stopped - notifying ${lifecycleListeners.size} listeners")
+        Logger.d(TAG, "App stopped - notifying ${lifecycleListeners.size} listeners")
         for (listener in lifecycleListeners) {
             try {
                 listener.onAppStopped()
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onAppStopped for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onAppStopped for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -163,7 +163,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivityCreated(activity)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivityCreated for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivityCreated for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -173,7 +173,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivityStarted(activity)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivityStarted for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivityStarted for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -183,7 +183,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivityResumed(activity)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivityResumed for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivityResumed for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -193,7 +193,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivityPaused(activity)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivityPaused for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivityPaused for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -203,7 +203,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivityStopped(activity)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivityStopped for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivityStopped for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -213,7 +213,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivitySaveInstanceState(activity, outState)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivitySaveInstanceState for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivitySaveInstanceState for ${listener.javaClass.simpleName}", e)
             }
         }
     }
@@ -223,7 +223,7 @@ class ApplicationLifecycleManager private constructor() {
             try {
                 listener.onActivityDestroyed(activity)
             } catch (e: Exception) {
-                Log.e(TAG, "Error in onActivityDestroyed for ${listener.javaClass.simpleName}", e)
+                Logger.e(TAG, "Error in onActivityDestroyed for ${listener.javaClass.simpleName}", e)
             }
         }
     }

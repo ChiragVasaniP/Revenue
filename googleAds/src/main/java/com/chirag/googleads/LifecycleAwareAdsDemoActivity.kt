@@ -2,7 +2,7 @@ package com.chirag.googleads
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -34,7 +34,7 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lifecycle_aware_ads_demo)
         initializeViews()
-        Log.i(TAG, "🚀 LifecycleAwareAdsDemoActivity created")
+        Logger.i(TAG, "🚀 LifecycleAwareAdsDemoActivity created")
         addEventLog("Activity Created")
         
 
@@ -169,13 +169,13 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     
     override fun onStart() {
         super.onStart()
-        Log.i(TAG, "▶️ LifecycleAwareAdsDemoActivity started")
+        Logger.i(TAG, "▶️ LifecycleAwareAdsDemoActivity started")
         addEventLog("Activity Started")
     }
     
     override fun onResume() {
         super.onResume()
-        Log.i(TAG, "▶️ LifecycleAwareAdsDemoActivity resumed")
+        Logger.i(TAG, "▶️ LifecycleAwareAdsDemoActivity resumed")
         addEventLog("Activity Resumed")
         updateStatus("Active")
         
@@ -185,21 +185,21 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     
     override fun onPause() {
         super.onPause()
-        Log.i(TAG, "⏸️ LifecycleAwareAdsDemoActivity paused")
+        Logger.i(TAG, "⏸️ LifecycleAwareAdsDemoActivity paused")
         addEventLog("Activity Paused")
         updateStatus("Paused")
     }
     
     override fun onStop() {
         super.onStop()
-        Log.i(TAG, "⏸️ LifecycleAwareAdsDemoActivity stopped")
+        Logger.i(TAG, "⏸️ LifecycleAwareAdsDemoActivity stopped")
         addEventLog("Activity Stopped")
         updateStatus("Stopped")
     }
     
     override fun onDestroy() {
         super.onDestroy()
-        Log.i(TAG, "🗑️ LifecycleAwareAdsDemoActivity destroyed")
+        Logger.i(TAG, "🗑️ LifecycleAwareAdsDemoActivity destroyed")
         addEventLog("Activity Destroyed")
         updateStatus("Destroyed")
     }

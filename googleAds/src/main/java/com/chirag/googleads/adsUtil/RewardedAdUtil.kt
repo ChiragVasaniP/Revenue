@@ -2,7 +2,7 @@ package com.chirag.googleads.adsUtil
 
 
 import android.app.Activity
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
@@ -34,7 +34,7 @@ internal object RewardedAdUtil {
         onAdClosed: () -> Unit
     ) {
         if (isLoading) {
-            Log.d(TAG, "Rewarded ad is already loading.")
+            Logger.d(TAG, "Rewarded ad is already loading.")
             return
         }
 
@@ -48,50 +48,50 @@ internal object RewardedAdUtil {
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {
-                    Log.d(TAG, "Rewarded ad loaded.")
+                    Logger.d(TAG, "Rewarded ad loaded.")
                     isLoading = false
 
                     ad.onPaidEventListener = OnPaidEventListener {adValue ->
-                        Log.d(TAG, "Reward onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                        Logger.d(TAG, "Reward onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
                     }
 
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
-                            Log.d(TAG, "Ad was dismissed.")
+                            Logger.d(TAG, "Ad was dismissed.")
 //                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            Log.e(TAG, "Ad failed to show: ${adError.message}")
+                            Logger.e(TAG, "Ad failed to show: ${adError.message}")
 //                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdShowedFullScreenContent() {
-                            Log.d(TAG, "Ad is showing.")
+                            Logger.d(TAG, "Ad is showing.")
                         }
 
                         override fun onAdClicked() {
-                            Log.d(TAG, "Ad clicked.")
+                            Logger.d(TAG, "Ad clicked.")
                         }
 
                         override fun onAdImpression() {
-                            Log.d(TAG, "Ad impression recorded.")
+                            Logger.d(TAG, "Ad impression recorded.")
                         }
                     }
 
                     ad.show(
                         activity,
                         OnUserEarnedRewardListener { rewardItem ->
-                            Log.d(TAG, "User earned reward: ${rewardItem.amount} ${rewardItem.type}")
+                            Logger.d(TAG, "User earned reward: ${rewardItem.amount} ${rewardItem.type}")
                             onRewardEarned(rewardItem)
                         }
                     )
                 }
 
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e(TAG, "Ad failed to load: ${adError.message}")
+                    Logger.e(TAG, "Ad failed to load: ${adError.message}")
                     isLoading = false
                     if (BuildConfig.DEBUG) Toast.makeText(activity, "Rewarded ad failed to load.", Toast.LENGTH_SHORT).show()
 //                    AdProgressManager.dismissDialog()

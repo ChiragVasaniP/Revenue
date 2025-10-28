@@ -1,10 +1,10 @@
 package com.chirag.googleads.adsUtil.banner
 
 import android.app.Activity
-import android.util.Log
 import android.view.ViewGroup
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
+import com.chirag.googleads.util.Logger
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -60,7 +60,7 @@ internal object BannerAdsUtil {
                 val adRequest = AdRequest.Builder().build()
                 adView.loadAd(adRequest)
 
-                Log.d(TAG, "Banner Ad loaded in container.")
+                Logger.d(TAG, "Banner Ad loaded in container.")
             }
         }
     }

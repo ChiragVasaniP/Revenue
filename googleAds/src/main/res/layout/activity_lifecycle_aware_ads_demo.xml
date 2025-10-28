@@ -65,7 +65,7 @@
         <FrameLayout
             android:id="@+id/adsContainer"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:background="#F2F2F2"
             android:layout_marginBottom="16dp">
 

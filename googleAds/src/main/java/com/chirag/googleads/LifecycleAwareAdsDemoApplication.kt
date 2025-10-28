@@ -1,7 +1,7 @@
 package com.chirag.googleads
 
 import android.app.Application
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import com.chirag.googleads.base.ApplicationLifecycleManager
 
 /**
@@ -22,7 +22,7 @@ class LifecycleAwareAdsDemoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         
-        Log.i(TAG, "🚀 LifecycleAwareAdsDemoApplication created")
+        Logger.i(TAG, "🚀 LifecycleAwareAdsDemoApplication created")
         
         // Initialize the ApplicationLifecycleManager for the Google Ads module
         initializeLifecycleManager()
@@ -34,9 +34,9 @@ class LifecycleAwareAdsDemoApplication : Application() {
     private fun initializeLifecycleManager() {
         try {
             ApplicationLifecycleManager.getInstance().initialize(this)
-            Log.i(TAG, "✅ ApplicationLifecycleManager initialized successfully")
+            Logger.i(TAG, "✅ ApplicationLifecycleManager initialized successfully")
         } catch (e: Exception) {
-            Log.e(TAG, "❌ Error initializing ApplicationLifecycleManager: ${e.message}", e)
+            Logger.e(TAG, "❌ Error initializing ApplicationLifecycleManager: ${e.message}", e)
         }
     }
     
@@ -44,24 +44,24 @@ class LifecycleAwareAdsDemoApplication : Application() {
         try {
             val adsManager = LifecycleAwareAdsManager.getInstance()
             adsManager.initialize()
-            Log.i(TAG, "✅ LifecycleAwareAdsManager initialized successfully")
+            Logger.i(TAG, "✅ LifecycleAwareAdsManager initialized successfully")
         } catch (e: Exception) {
-            Log.e(TAG, "❌ Error initializing LifecycleAwareAdsManager: ${e.message}", e)
+            Logger.e(TAG, "❌ Error initializing LifecycleAwareAdsManager: ${e.message}", e)
         }
     }
     
     override fun onTerminate() {
         super.onTerminate()
         
-        Log.i(TAG, "🗑️ LifecycleAwareAdsDemoApplication terminating")
+        Logger.i(TAG, "🗑️ LifecycleAwareAdsDemoApplication terminating")
         
         // Cleanup lifecycle-aware components
         try {
             val adsManager = LifecycleAwareAdsManager.getInstance()
             adsManager.cleanup()
-            Log.i(TAG, "✅ LifecycleAwareAdsManager cleaned up")
+            Logger.i(TAG, "✅ LifecycleAwareAdsManager cleaned up")
         } catch (e: Exception) {
-            Log.e(TAG, "❌ Error cleaning up LifecycleAwareAdsManager: ${e.message}", e)
+            Logger.e(TAG, "❌ Error cleaning up LifecycleAwareAdsManager: ${e.message}", e)
         }
     }
 } 

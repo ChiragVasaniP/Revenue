@@ -3,7 +3,7 @@ package com.chirag.googleads.consent
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.MyApplication
@@ -47,7 +47,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
         MobileAds.initialize(context) {}
 
-        Log.d("AdUtil", "Ad SDK initialized.")
+        Logger.d("AdUtil", "Ad SDK initialized.")
     }
 
     fun loadOpenAppAds(context: Activity){
@@ -77,7 +77,7 @@ import java.util.concurrent.atomic.AtomicBoolean
         // Start the consent form flow (if required)
         consentManager.gatherConsent(activity) { consentError ->
             if (consentError != null) {
-                Log.w("AdUtil", "${consentError.errorCode}: ${consentError.message}")
+                Logger.w("AdUtil", "${consentError.errorCode}: ${consentError.message}")
             }
 
             isConsentFetched.set(true)

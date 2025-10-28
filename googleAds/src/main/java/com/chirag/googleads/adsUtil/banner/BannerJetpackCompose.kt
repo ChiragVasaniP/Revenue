@@ -19,7 +19,6 @@ package com.chirag.googleads.adsUtil.banner
 
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,6 +37,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.localcache.LocalAdPrefHelper
+import com.chirag.googleads.util.Logger
 import com.chirag.googleads.util.getCurrentActivity
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -82,19 +82,19 @@ fun BannerAd(
 
                     adListener = object : AdListener() {
                         override fun onAdLoaded() {
-                            Log.d(TAG, "Banner ad was loaded.")
+                            Logger.d(TAG, "Banner ad was loaded.")
                         }
 
                         override fun onAdFailedToLoad(error: LoadAdError) {
-                            Log.e(TAG, "Banner ad failed to load: ${error.message}")
+                            Logger.e(TAG, "Banner ad failed to load: ${error.message}")
                         }
 
                         override fun onAdImpression() {
-                            Log.d(TAG, "Banner ad recorded an impression.")
+                            Logger.d(TAG, "Banner ad recorded an impression.")
                         }
 
                         override fun onAdClicked() {
-                            Log.d(TAG, "Banner ad was clicked.")
+                            Logger.d(TAG, "Banner ad was clicked.")
                         }  }
                 }
             },

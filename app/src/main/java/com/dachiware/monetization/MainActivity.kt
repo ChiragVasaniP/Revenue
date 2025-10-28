@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         setAdsLocalData()
 
         AdConsentUtil.gatherConsent(this@MainActivity) { aBoolean: Boolean? ->
-            AdConsentUtil.loadOpenAppAds(this@MainActivity)
             if (AdConsentUtil.canRequestAds(this@MainActivity)) {
+                AdConsentUtil.loadOpenAppAds(this@MainActivity)
                 Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
                     override fun run() {
                         AdConsentUtil.showAdIfAvailableAndThen(this@MainActivity) {
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                             finish()
                         }
                     }
-                }, 8000)
+                }, 15000)
             }
         }
 

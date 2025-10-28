@@ -1,7 +1,7 @@
 package com.chirag.googleads
 
 import android.app.Activity
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.view.ViewGroup
 import androidx.annotation.Keep
 import com.chirag.googleads.adsUtil.AdvanceNativeAdsUtil
@@ -62,7 +62,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
         if (!isInitialized) {
             ApplicationLifecycleManager.getInstance().registerLifecycleListener(this)
             isInitialized = true
-            Log.i(TAG, "LifecycleAwareAdsManager initialized")
+            Logger.i(TAG, "LifecycleAwareAdsManager initialized")
         }
     }
 
@@ -73,7 +73,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
         if (isInitialized) {
             ApplicationLifecycleManager.getInstance().unregisterLifecycleListener(this)
             isInitialized = false
-            Log.i(TAG, "LifecycleAwareAdsManager cleaned up")
+            Logger.i(TAG, "LifecycleAwareAdsManager cleaned up")
         }
     }
 
@@ -81,7 +81,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
 
     override fun onAppStarted() {
         isAppInForeground = true
-        Log.i(TAG, "🚀 App started - Preloading ads for better performance")
+        Logger.i(TAG, "🚀 App started - Preloading ads for better performance")
 
         // Preload ads when app comes to foreground for better user experience
         preloadAds()
@@ -89,14 +89,14 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
 
     override fun onAppStopped() {
         isAppInForeground = false
-        Log.i(TAG, "⏸️ App stopped - Pausing ad operations")
+        Logger.i(TAG, "⏸️ App stopped - Pausing ad operations")
 
         // Pause ad operations when app goes to background
         pauseAdOperations()
     }
 
     override fun onActivityResumed(activity: Activity) {
-        Log.d(TAG, "▶️ Activity resumed: ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "▶️ Activity resumed: ${activity.javaClass.simpleName}")
 
         // Resume ad operations for specific activities if needed
         if (isAppInForeground) {
@@ -105,14 +105,14 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
     }
 
     override fun onActivityPaused(activity: Activity) {
-        Log.d(TAG, "⏸️ Activity paused: ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "⏸️ Activity paused: ${activity.javaClass.simpleName}")
 
         // Pause ad operations for specific activities
         pauseActivityAdOperations(activity)
     }
 
     override fun onActivityDestroyed(activity: Activity) {
-        Log.d(TAG, "🗑️ Activity destroyed: ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "🗑️ Activity destroyed: ${activity.javaClass.simpleName}")
 
         // Cleanup activity-specific ad resources
         cleanupActivityAdResources(activity)
@@ -126,7 +126,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
     fun showBannerAds(activity: Activity, viewGroup: ViewGroup) {
         if (!canShowAds(activity)) return
 
-        Log.d(TAG, "Showing banner ad in ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Showing banner ad in ${activity.javaClass.simpleName}")
         BannerAdsUtil.showBannerAd(activity, container = viewGroup)
     }
 
@@ -136,7 +136,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
     fun showNativeAds(activity: Activity, viewGroup: ViewGroup) {
         if (!canShowAds(activity)) return
 
-        Log.d(TAG, "Showing native ad in ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Showing native ad in ${activity.javaClass.simpleName}")
         AdvanceNativeAdsUtil.loadAndShowNativeAd(activity, container = viewGroup)
     }
 
@@ -150,12 +150,12 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
         }
 
         if (!canShowInterstitialAd()) {
-            Log.d(TAG, "Interstitial ad skipped due to frequency limit")
+            Logger.d(TAG, "Interstitial ad skipped due to frequency limit")
             onAdClosed.invoke()
             return
         }
 
-        Log.d(TAG, "Showing interstitial ad in ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Showing interstitial ad in ${activity.javaClass.simpleName}")
         lastAdShowTime = System.currentTimeMillis()
         InterstitialAdUtil.loadAndShowAd(activity, onAdClosed)
     }
@@ -173,7 +173,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
             return
         }
 
-        Log.d(TAG, "Showing rewarded ad in ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Showing rewarded ad in ${activity.javaClass.simpleName}")
         RewardedAdUtil.loadAndShowAd(activity, onRewardEarned, onAdClosed)
     }
 
@@ -190,14 +190,14 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
             return
         }
 
-        Log.d(TAG, "Showing rewarded interstitial ad in ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Showing rewarded interstitial ad in ${activity.javaClass.simpleName}")
         RewardedInterstitialAdUtil.loadAndShowAd(activity, onRewardEarned, onAdClosed)
     }
 
     // Lifecycle-aware ad management methods
 
     private fun preloadAds() {
-        Log.d(TAG, "Preloading ads for better performance")
+        Logger.d(TAG, "Preloading ads for better performance")
 
         // Preload interstitial ads when app comes to foreground
         if (isAppInForeground) {
@@ -208,7 +208,7 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
                 preloadRewardedAd()
                 preloadRewardedInterstitialAd()
             } catch (e: Exception) {
-                Log.w(TAG, "Error preloading ads: ${e.message}")
+                Logger.w(TAG, "Error preloading ads: ${e.message}")
             }
         }
     }
@@ -218,11 +218,11 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
             // Call preload method if it exists in InterstitialAdUtil
             InterstitialAdUtil::class.java.getMethod("preloadAd").invoke(null)
             interstitialAdReady = true
-            Log.d(TAG, "Interstitial ad preloaded successfully")
+            Logger.d(TAG, "Interstitial ad preloaded successfully")
         } catch (e: NoSuchMethodException) {
-            Log.d(TAG, "InterstitialAdUtil.preloadAd() method not found - skipping preload")
+            Logger.d(TAG, "InterstitialAdUtil.preloadAd() method not found - skipping preload")
         } catch (e: Exception) {
-            Log.w(TAG, "Error preloading interstitial ad: ${e.message}")
+            Logger.w(TAG, "Error preloading interstitial ad: ${e.message}")
         }
     }
 
@@ -231,11 +231,11 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
             // Call preload method if it exists in RewardedAdUtil
             RewardedAdUtil::class.java.getMethod("preloadAd").invoke(null)
             rewardedAdReady = true
-            Log.d(TAG, "Rewarded ad preloaded successfully")
+            Logger.d(TAG, "Rewarded ad preloaded successfully")
         } catch (e: NoSuchMethodException) {
-            Log.d(TAG, "RewardedAdUtil.preloadAd() method not found - skipping preload")
+            Logger.d(TAG, "RewardedAdUtil.preloadAd() method not found - skipping preload")
         } catch (e: Exception) {
-            Log.w(TAG, "Error preloading rewarded ad: ${e.message}")
+            Logger.w(TAG, "Error preloading rewarded ad: ${e.message}")
         }
     }
 
@@ -244,36 +244,36 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
             // Call preload method if it exists in RewardedInterstitialAdUtil
             RewardedInterstitialAdUtil::class.java.getMethod("preloadAd").invoke(null)
             rewardedInterstitialAdReady = true
-            Log.d(TAG, "Rewarded interstitial ad preloaded successfully")
+            Logger.d(TAG, "Rewarded interstitial ad preloaded successfully")
         } catch (e: NoSuchMethodException) {
-            Log.d(TAG, "RewardedInterstitialAdUtil.preloadAd() method not found - skipping preload")
+            Logger.d(TAG, "RewardedInterstitialAdUtil.preloadAd() method not found - skipping preload")
         } catch (e: Exception) {
-            Log.w(TAG, "Error preloading rewarded interstitial ad: ${e.message}")
+            Logger.w(TAG, "Error preloading rewarded interstitial ad: ${e.message}")
         }
     }
 
     private fun pauseAdOperations() {
-        Log.d(TAG, "Pausing ad operations")
+        Logger.d(TAG, "Pausing ad operations")
 
         // Pause ad loading when app goes to background
         // This helps save resources and battery
     }
 
     private fun resumeAdOperations(activity: Activity) {
-        Log.d(TAG, "Resuming ad operations for ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Resuming ad operations for ${activity.javaClass.simpleName}")
 
         // Resume ad operations for specific activities
         // This can be customized based on activity type
     }
 
     private fun pauseActivityAdOperations(activity: Activity) {
-        Log.d(TAG, "Pausing ad operations for ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Pausing ad operations for ${activity.javaClass.simpleName}")
 
         // Pause activity-specific ad operations
     }
 
     private fun cleanupActivityAdResources(activity: Activity) {
-        Log.d(TAG, "Cleaning up ad resources for ${activity.javaClass.simpleName}")
+        Logger.d(TAG, "Cleaning up ad resources for ${activity.javaClass.simpleName}")
 
         // Cleanup activity-specific ad resources
         // This prevents memory leaks

@@ -2,7 +2,7 @@ package com.chirag.googleads.adsUtil
 
 
 import android.app.Activity
-import android.util.Log
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
@@ -48,14 +48,14 @@ internal object InterstitialAdUtil {
                     interstitialAd = ad
                     isAdLoading = false
                     ad.onPaidEventListener = OnPaidEventListener {adValue ->
-                        Log.d(TAG, "Interstitial onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                        Logger.d(TAG, "Interstitial onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
                     }
-                    Log.d(TAG, "Interstitial ad loaded")
+                    Logger.d(TAG, "Interstitial ad loaded")
                     onLoaded?.invoke()
                 }
 
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e(TAG, "Interstitial ad failed to load: ${adError.message}")
+                    Logger.e(TAG, "Interstitial ad failed to load: ${adError.message}")
                     interstitialAd = null
                     isAdLoading = false
                     if (BuildConfig.DEBUG) Toast.makeText(
@@ -80,33 +80,33 @@ internal object InterstitialAdUtil {
         if (ad != null) {
             ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
-                    Log.d(TAG, "Interstitial ad dismissed.")
+                    Logger.d(TAG, "Interstitial ad dismissed.")
                     interstitialAd = null
                     onAdClosed()
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                    Log.w(TAG, "Interstitial ad failed to show: ${adError.message}")
+                    Logger.w(TAG, "Interstitial ad failed to show: ${adError.message}")
                     interstitialAd = null
                     onAdClosed()
                 }
 
                 override fun onAdShowedFullScreenContent() {
-                    Log.d(TAG, "Interstitial ad showed.")
+                    Logger.d(TAG, "Interstitial ad showed.")
                 }
 
                 override fun onAdClicked() {
-                    Log.d(TAG, "Interstitial ad clicked.")
+                    Logger.d(TAG, "Interstitial ad clicked.")
                 }
 
                 override fun onAdImpression() {
-                    Log.d(TAG, "Interstitial ad impression recorded.")
+                    Logger.d(TAG, "Interstitial ad impression recorded.")
                 }
             }
 
             ad.show(activity)
         } else {
-            Log.d(TAG, "Interstitial ad not ready.")
+            Logger.d(TAG, "Interstitial ad not ready.")
             onAdClosed()
         }
     }
@@ -129,7 +129,7 @@ internal object InterstitialAdUtil {
     fun loadAndShowAd(activity: Activity,  onAdClosed: () -> Unit) {
         if (isAdLoading) {
             onAdClosed.invoke()
-            Log.d(TAG, "Ad is already loading.")
+            Logger.d(TAG, "Ad is already loading.")
             return
         }
 
@@ -143,39 +143,39 @@ internal object InterstitialAdUtil {
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
-                    Log.d(TAG, "Interstitial ad loaded")
+                    Logger.d(TAG, "Interstitial ad loaded")
                     isAdLoading = false
                     interstitialAd = ad
 
                     ad.onPaidEventListener = OnPaidEventListener {adValue ->
-                        Log.d(TAG, "Interstitial onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
+                        Logger.d(TAG, "Interstitial onPaidEventListener: ${adValue.precisionType} ${adValue.valueMicros} ${adValue.currencyCode}")
                     }
 
                     ad.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
-                            Log.d(TAG, "Ad dismissed.")
+                            Logger.d(TAG, "Ad dismissed.")
                             interstitialAd = null
 //                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                            Log.w(TAG, "Ad failed to show: ${adError.message}")
+                            Logger.w(TAG, "Ad failed to show: ${adError.message}")
                             interstitialAd = null
 //                            AdProgressManager.dismissDialog()
                             onAdClosed()
                         }
 
                         override fun onAdShowedFullScreenContent() {
-                            Log.d(TAG, "Ad showed.")
+                            Logger.d(TAG, "Ad showed.")
                         }
 
                         override fun onAdImpression() {
-                            Log.d(TAG, "Ad impression recorded.")
+                            Logger.d(TAG, "Ad impression recorded.")
                         }
 
                         override fun onAdClicked() {
-                            Log.d(TAG, "Ad clicked.")
+                            Logger.d(TAG, "Ad clicked.")
                         }
                     }
 
@@ -183,7 +183,7 @@ internal object InterstitialAdUtil {
                 }
 
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.e(TAG, "Failed to load interstitial ad: ${adError.message}")
+                    Logger.e(TAG, "Failed to load interstitial ad: ${adError.message}")
                     interstitialAd = null
                     isAdLoading = false
                     if (BuildConfig.DEBUG) Toast.makeText(activity, "Ad failed: ${adError.message}", Toast.LENGTH_SHORT).show()
