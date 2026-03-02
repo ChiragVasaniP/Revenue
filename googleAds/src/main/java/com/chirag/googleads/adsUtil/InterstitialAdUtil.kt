@@ -128,7 +128,7 @@ internal object InterstitialAdUtil {
      */
     fun loadAndShowAd(activity: Activity,  onAdClosed: () -> Unit) {
         if (isAdLoading) {
-            onAdClosed.invoke()
+//            onAdClosed.invoke()
             Logger.d(TAG, "Ad is already loading.")
             return
         }
