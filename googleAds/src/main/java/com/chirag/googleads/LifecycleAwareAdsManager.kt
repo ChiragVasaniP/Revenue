@@ -1,7 +1,7 @@
 package com.chirag.googleads
 
 import android.app.Activity
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.view.ViewGroup
 import androidx.annotation.Keep
 import com.chirag.googleads.adsUtil.AdvanceNativeAdsUtil

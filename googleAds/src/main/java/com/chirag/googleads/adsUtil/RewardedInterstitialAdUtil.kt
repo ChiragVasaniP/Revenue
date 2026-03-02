@@ -2,7 +2,7 @@ package com.chirag.googleads.adsUtil
 
 
 import android.app.Activity
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
@@ -85,7 +85,7 @@ internal object RewardedInterstitialAdUtil {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Logger.e(TAG, "Ad failed to load: ${adError.message}")
                     isAdLoading = false
-                    Toast.makeText(activity, "Ad failed to load.", Toast.LENGTH_SHORT).show()
+                    Logger.makeTextToast(activity, "Ad failed to load.", Toast.LENGTH_SHORT)
                     onAdClosed()
                 }
             }

@@ -1,7 +1,7 @@
 package com.chirag.googleads.adsUtil
 
 import android.app.Activity
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -69,7 +69,7 @@ internal object AdvanceNativeAdsUtil {
         builder.withAdListener(object : AdListener() {
             override fun onAdFailedToLoad(error: LoadAdError) {
                 Logger.e(TAG, "Native ad failed to load: ${error.message}")
-                Toast.makeText(activity, "Failed to load native ad.", Toast.LENGTH_SHORT).show()
+                Logger.makeTextToast(activity, "Failed to load native ad.", Toast.LENGTH_SHORT)
             }
         })
 

@@ -2,7 +2,7 @@ package com.chirag.googleads.adsUtil
 
 import android.app.Activity
 import android.content.Context
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.consent.AdConsentUtil
@@ -19,7 +19,7 @@ import java.util.Date
 
 // This is an ad unit ID for a test ad. Replace with your own app open ad unit ID.
 private const val AD_UNIT_ID = "ca-app-pub-3940256099942544/9257395921"
-private const val LOG_TAG = "MyApplication"
+private const val LOG_TAG = "AppOpenAdManager"
 
 /**
  * Interface definition for a callback to be invoked when an app open ad is complete (i.e.
@@ -79,7 +79,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
                     isLoadingAd = false
                     loadTime = Date().time
                     Logger.d(LOG_TAG, "onAdLoaded.")
-                    if (BuildConfig.DEBUG) Toast.makeText(context, "onAdLoaded", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(context, "onAdLoaded", Toast.LENGTH_SHORT)
                 }
 
                 /**
@@ -90,7 +90,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                     isLoadingAd = false
                     Logger.d(LOG_TAG, "onAdFailedToLoad: " + loadAdError.message)
-                    if (BuildConfig.DEBUG) Toast.makeText(context, "onAdFailedToLoad", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(context, "onAdFailedToLoad", Toast.LENGTH_SHORT)
                 }
             },
         )
@@ -168,7 +168,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
                     appOpenAd = null
                     isShowingAd = false
                     Logger.d(LOG_TAG, "onAdDismissedFullScreenContent.")
-                    if (BuildConfig.DEBUG) Toast.makeText(activity, "onAdDismissedFullScreenContent", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(activity, "onAdDismissedFullScreenContent", Toast.LENGTH_SHORT)
 
                     onShowAdCompleteListener.onShowAdComplete()
                     if (googleMobileAdsConsentManager.canRequestAds) {
@@ -181,7 +181,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
                     appOpenAd = null
                     isShowingAd = false
                     Logger.d(LOG_TAG, "onAdFailedToShowFullScreenContent: " + adError.message)
-                    if (BuildConfig.DEBUG) Toast.makeText(activity, "onAdFailedToShowFullScreenContent", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(activity, "onAdFailedToShowFullScreenContent", Toast.LENGTH_SHORT)
 
                     onShowAdCompleteListener.onShowAdComplete()
                     if (googleMobileAdsConsentManager.canRequestAds) {
@@ -192,7 +192,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
                 /** Called when fullscreen content is shown. */
                 override fun onAdShowedFullScreenContent() {
                     Logger.d(LOG_TAG, "onAdShowedFullScreenContent.")
-                    if (BuildConfig.DEBUG) Toast.makeText(activity, "onAdShowedFullScreenContent", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(activity, "onAdShowedFullScreenContent", Toast.LENGTH_SHORT)
                 }
             }
         isShowingAd = true

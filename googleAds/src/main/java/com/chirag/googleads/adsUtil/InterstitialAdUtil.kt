@@ -2,7 +2,7 @@ package com.chirag.googleads.adsUtil
 
 
 import android.app.Activity
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
@@ -58,11 +58,11 @@ internal object InterstitialAdUtil {
                     Logger.e(TAG, "Interstitial ad failed to load: ${adError.message}")
                     interstitialAd = null
                     isAdLoading = false
-                    if (BuildConfig.DEBUG) Toast.makeText(
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(
                         activity,
                         "Ad failed to load: ${adError.message}",
                         Toast.LENGTH_SHORT
-                    ).show()
+                    )
                 }
             }
         )
@@ -186,7 +186,7 @@ internal object InterstitialAdUtil {
                     Logger.e(TAG, "Failed to load interstitial ad: ${adError.message}")
                     interstitialAd = null
                     isAdLoading = false
-                    if (BuildConfig.DEBUG) Toast.makeText(activity, "Ad failed: ${adError.message}", Toast.LENGTH_SHORT).show()
+                    if (BuildConfig.DEBUG) Logger.makeTextToast(activity, "Ad failed: ${adError.message}", Toast.LENGTH_SHORT)
 //                    AdProgressManager.dismissDialog()
                     onAdClosed()
                 }

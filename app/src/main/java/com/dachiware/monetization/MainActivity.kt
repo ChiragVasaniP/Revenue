@@ -10,12 +10,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.chirag.googleads.LifecycleAwareAdsDemoActivity
 import com.chirag.googleads.consent.AdConsentUtil
+//import com.chirag.googleads.event.FirebaseInitializer
 import com.chirag.googleads.localcache.CLICK_TYPE
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        FirebaseInitializer.init(this)
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -52,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setAdsLocalData() {
         LocalAdPrefHelper.setAdsEnabled(true)
+        LocalAdPrefHelper.enableAdsLogging(true)
 //        LocalAdPrefHelper.setBannerAdId("ca-app-pub-3940256099942544/9214589741")
 //        LocalAdPrefHelper.setInterstitialAdId("ca-app-pub-3940256099942544/1033173712")
 //        LocalAdPrefHelper.setNativeAdId("ca-app-pub-3940256099942544/2247696110")

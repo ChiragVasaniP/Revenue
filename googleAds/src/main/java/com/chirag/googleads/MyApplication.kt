@@ -3,24 +3,34 @@ package com.chirag.googleads
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
-import androidx.multidex.MultiDexApplication
 import com.chirag.googleads.adsUtil.AppOpenAdManager
 import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
 import com.chirag.googleads.base.ApplicationLifecycleManager
 import com.chirag.googleads.localcache.PreferenceManager
+//import com.chirag.googleads.util.FirebaseResourcesWrapper
+
 
 /** Application class that initializes, loads and show ads when activities change states. */
 open class MyApplication :
     Application(), Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
 
     private lateinit var appOpenAdManager: AppOpenAdManager
+
+//    private var firebaseResources: FirebaseResourcesWrapper? = null
+
     var currentActivity: Activity? = null
+
+
+/*    override fun getResources(): Resources? {
+        if (firebaseResources == null) firebaseResources = FirebaseResourcesWrapper(super.getResources())
+        return firebaseResources
+    }*/
 
     override fun onCreate() {
         super<Application>.onCreate()
@@ -30,16 +40,6 @@ open class MyApplication :
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         appOpenAdManager = AppOpenAdManager(this@MyApplication)
 
-        /*        val options = FirebaseOptions.Builder()
-                    .setApplicationId("1:1234567890:android:abcdef123456")
-                    .setApiKey("AIzaSy...")
-                    .setProjectId("your-project-id")
-                    .setStorageBucket("your-project-id.appspot.com")
-                    .build()
-
-                if (FirebaseApp.getApps(this).isEmpty()) {
-                    FirebaseApp.initializeApp(this, options)
-                }*/
     }
 
     /**

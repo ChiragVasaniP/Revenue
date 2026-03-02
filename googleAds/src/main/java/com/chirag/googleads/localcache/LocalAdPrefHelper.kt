@@ -5,7 +5,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.BuildConfig
+import com.chirag.googleads.event.Logger
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket
@@ -96,7 +97,7 @@ object LocalAdPrefHelper {
         PreferenceManager.putBoolean(KEY_IS_ADS_ENABLED, enabled)
     }
 
-    internal fun getAdsEnabled(default: Boolean = true): Boolean {
+    internal fun getAdsEnabled(default: Boolean = BuildConfig.DEBUG): Boolean {
         return PreferenceManager.getBoolean(KEY_IS_ADS_ENABLED, default)
 
     }
@@ -117,9 +118,9 @@ object LocalAdPrefHelper {
             return false
         }
 
-        if (isActivityFromModule(activity)) {
-            return true
-        }
+//        if (isActivityFromModule(activity)) {
+//            return true
+//        }
 
         return getAdsEnabled(default) && getPlayConsoleAppVersionCode() != getAppVersionCode(
             activity

@@ -4,7 +4,7 @@ import android.app.Activity
 import android.view.ViewGroup
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView

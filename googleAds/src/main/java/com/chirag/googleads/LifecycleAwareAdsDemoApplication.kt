@@ -1,7 +1,7 @@
 package com.chirag.googleads
 
 import android.app.Application
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import com.chirag.googleads.base.ApplicationLifecycleManager
 
 /**

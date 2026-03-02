@@ -3,7 +3,7 @@ package com.chirag.googleads.consent
 
 import android.app.Activity
 import android.content.Context
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.MyApplication
@@ -99,7 +99,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
         consentManager.showPrivacyOptionsForm(activity) { formError ->
             if (formError != null) {
-                Toast.makeText(activity, formError.message, Toast.LENGTH_SHORT).show()
+                Logger.makeTextToast(activity, formError.message, Toast.LENGTH_SHORT)
             }
         }
     }
@@ -139,7 +139,7 @@ import java.util.concurrent.atomic.AtomicBoolean
     fun openGoogleAdsInspect(context: Context) {
         MobileAds.openAdInspector(context) { error ->
             // Error will be non-null if ad inspector closed due to an error.
-            error?.let { Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show() }
+            error?.let { Logger.makeTextToast(context, it.message, Toast.LENGTH_SHORT) }
         }
     }
 }

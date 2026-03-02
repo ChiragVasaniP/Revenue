@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1062841038778",
+    "project_id": "fir-chirag-projects",
+    "storage_bucket": "fir-chirag-projects.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062841038778:android:202ee79a23b33248ec8f83",
+        "android_client_info": {
+          "package_name": "com.dachiware.monetization"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeZ_HJI8Xo7I4I7EU8A5T2EVmuMZzFB9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062841038778:android:c483786638bb2b0fec8f83",
+        "android_client_info": {
+          "package_name": "com.demo.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeZ_HJI8Xo7I4I7EU8A5T2EVmuMZzFB9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

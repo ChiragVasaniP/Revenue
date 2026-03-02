@@ -5,7 +5,7 @@ import android.content.ContextWrapper
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -161,7 +161,7 @@ fun MyScreen() {
             Text("Click Me")
         }
         Text(modifier = Modifier.oneAdClickable {
-            Toast.makeText(context, "Hello Ads Click", Toast.LENGTH_SHORT).show()
+            Logger.makeTextToast(context, "Hello Ads Click", Toast.LENGTH_SHORT)
         }, text = "TestAd Click")
     }
 

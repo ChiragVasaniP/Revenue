@@ -37,7 +37,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.localcache.LocalAdPrefHelper
-import com.chirag.googleads.util.Logger
+import com.chirag.googleads.event.Logger
 import com.chirag.googleads.util.getCurrentActivity
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
