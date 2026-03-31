@@ -6,8 +6,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ContextThemeWrapper
 import android.view.Window
 import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
+import com.chirag.googleads.R
 import com.chirag.googleads.databinding.LayoutGenericDialogBinding
 
 object GenericDialogHelper {
@@ -18,27 +21,29 @@ object GenericDialogHelper {
         description: String,
         @DrawableRes icon: Int? = null,
         showDismissIcon: Boolean = true,
+        @StyleRes themeOverlayResId: Int = R.style.ThemeOverlay_GoogleAds_GenericDialog,
         positiveButtonText: String? = null,
         negativeButtonText: String? = null,
         onPositiveClick: () -> Unit = {},
         onNegativeClick: () -> Unit = {},
         onDismiss: () -> Unit = {}
     ): Dialog {
-        val dialog = Dialog(context)
+        val themedContext = ContextThemeWrapper(context, themeOverlayResId)
+        val dialog = Dialog(themedContext)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         
-        val binding = LayoutGenericDialogBinding.inflate(LayoutInflater.from(context))
+        val binding = LayoutGenericDialogBinding.inflate(LayoutInflater.from(themedContext))
         dialog.setContentView(binding.root)
         
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)
 
         // Close button
-        binding.btnClose.visibility = if (showDismissIcon) View.VISIBLE else View.GONE
-        binding.btnClose.setOnClickListener {
-            dialog.dismiss()
-            onDismiss()
-        }
+//        binding.btnCancel.visibility = if (showDismissIcon) View.VISIBLE else View.GONE
+//        binding.btnCancel.setOnClickListener {
+//            dialog.dismiss()
+//            onDismiss()
+//        }
 
         // Title
         binding.tvTitle.text = title
@@ -81,7 +86,7 @@ object GenericDialogHelper {
             binding.btnPositive.visibility = View.GONE
         }
 
-        binding.buttonContainer.visibility = if (hasButtons) View.VISIBLE else View.GONE
+//        binding.buttonContainer.visibility = if (hasButtons) View.VISIBLE else View.GONE
 
         dialog.show()
         return dialog

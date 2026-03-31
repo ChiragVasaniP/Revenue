@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.chirag.googleads.util.GenericDialogHelper
 import com.chirag.googleads.util.OnOneOffClickListener
 import com.google.android.gms.ads.rewarded.RewardItem
 
@@ -92,6 +93,23 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
             })
         }
         buttonContainer.addView(customClickButton)
+
+        // Generic Dialog Button
+        val dialogButton = Button(this).apply {
+            text = "Open Generic Dialog"
+            setOnClickListener {
+                GenericDialogHelper.showGenericDialog(
+                    context = this@LifecycleAwareAdsDemoActivity,
+                    title = "Demo Dialog",
+                    description = "This is a generic dialog opened from LifecycleAwareAdsDemoActivity.",
+                    positiveButtonText = "Close",
+                    onPositiveClick = {
+                        addEventLog("Dialog closed")
+                    }
+                )
+            }
+        }
+        buttonContainer.addView(dialogButton)
 
         // Clear Log Button
         val clearButton = Button(this).apply {
@@ -249,4 +267,4 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     fun getAdsManager(): LifecycleAwareAdsManager = adsManager
     
     fun getEventLog(): String = eventLog.toString()
-} 
+}

@@ -6,7 +6,20 @@
         <item name="customTextColor">#000000</item>
         <item name="customProgressColor">#6200EE</item>
         <item name="customTrackColor">#DDDDDD</item>
+        <item name="genericDialogThemeOverlay">@style/ThemeOverlay.Monetization.GenericDialog</item>
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+
+    <style name="ThemeOverlay.Monetization.GenericDialog" parent="">
+        <item name="genericDialogSurfaceColor">#111827</item>
+        <item name="genericDialogTitleTextColor">#F9FAFB</item>
+        <item name="genericDialogDescriptionTextColor">#D1D5DB</item>
+        <item name="genericDialogIconBackgroundColor">#DC2626</item>
+        <item name="genericDialogIconTintColor">@android:color/white</item>
+        <item name="genericDialogPositiveButtonColor">#3B82F6</item>
+        <item name="genericDialogPositiveButtonTextColor">@android:color/white</item>
+        <item name="genericDialogNegativeButtonColor">#374151</item>
+        <item name="genericDialogNegativeButtonTextColor">#F9FAFB</item>
     </style>
 </resources>

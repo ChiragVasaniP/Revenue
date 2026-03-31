@@ -51,8 +51,31 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="ThemeOverlay.GoogleAds.GenericDialog" parent="">
+        <item name="genericDialogThemeOverlay">@style/ThemeOverlay.GoogleAds.GenericDialog</item>
+        <item name="genericDialogSurfaceColor">#F8FAFC</item>
+        <item name="genericDialogTitleTextColor">#0F172A</item>
+        <item name="genericDialogDescriptionTextColor">#475569</item>
+        <item name="genericDialogIconBackgroundColor">#7F1D1D</item>
+        <item name="genericDialogPositiveButtonColor">#DC2626</item>
+        <item name="genericDialogPositiveButtonTextColor">@android:color/white</item>
+        <item name="genericDialogNegativeButtonColor">#E2E8F0</item>
+        <item name="genericDialogNegativeButtonTextColor">#0F172A</item>
+        <item name="genericDialogIconTintColor">@android:color/white</item>
+    </style>
+
     <attr name="customCardBackgroundColor" format="color" />
     <attr name="customProgressColor" format="color" />
     <attr name="customTrackColor" format="color" />
     <attr name="customTextColor" format="color" />
+    <attr name="genericDialogThemeOverlay" format="reference" />
+    <attr name="genericDialogSurfaceColor" format="color" />
+    <attr name="genericDialogTitleTextColor" format="color" />
+    <attr name="genericDialogDescriptionTextColor" format="color" />
+    <attr name="genericDialogIconBackgroundColor" format="color" />
+    <attr name="genericDialogIconTintColor" format="color" />
+    <attr name="genericDialogPositiveButtonColor" format="color" />
+    <attr name="genericDialogPositiveButtonTextColor" format="color" />
+    <attr name="genericDialogNegativeButtonColor" format="color" />
+    <attr name="genericDialogNegativeButtonTextColor" format="color" />
 </resources>
