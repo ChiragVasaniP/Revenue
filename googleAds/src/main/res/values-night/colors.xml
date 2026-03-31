@@ -2,5 +2,9 @@
 <resources>
     <color name="color_ffcc66">#FFD580</color>
     <color name="blue">#82B1FF</color>
+
+
+    <color name="sessionLibTextColorPrimary">#FFFFFF</color>
+    <color name="sessionLibTextColorPrimaryInverse">#FEB71A</color>
 </resources>
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="Theme.Session.Lib" parent="Theme.Material3.Light.NoActionBar"/>
     <style name="AdAttribution">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -51,31 +53,66 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="ThemeOverlay.GoogleAds.GenericDialog" parent="">
-        <item name="genericDialogThemeOverlay">@style/ThemeOverlay.GoogleAds.GenericDialog</item>
-        <item name="genericDialogSurfaceColor">#F8FAFC</item>
-        <item name="genericDialogTitleTextColor">#0F172A</item>
-        <item name="genericDialogDescriptionTextColor">#475569</item>
-        <item name="genericDialogIconBackgroundColor">#7F1D1D</item>
-        <item name="genericDialogPositiveButtonColor">#DC2626</item>
-        <item name="genericDialogPositiveButtonTextColor">@android:color/white</item>
-        <item name="genericDialogNegativeButtonColor">#E2E8F0</item>
-        <item name="genericDialogNegativeButtonTextColor">#0F172A</item>
-        <item name="genericDialogIconTintColor">@android:color/white</item>
+
+    <style name="Session.Lib.Dialog.Animation" parent="">
+        <item name="android:windowEnterAnimation">@anim/session_lib_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/session_lib_dialog_exit</item>
     </style>
 
-    <attr name="customCardBackgroundColor" format="color" />
-    <attr name="customProgressColor" format="color" />
-    <attr name="customTrackColor" format="color" />
-    <attr name="customTextColor" format="color" />
-    <attr name="genericDialogThemeOverlay" format="reference" />
-    <attr name="genericDialogSurfaceColor" format="color" />
-    <attr name="genericDialogTitleTextColor" format="color" />
-    <attr name="genericDialogDescriptionTextColor" format="color" />
-    <attr name="genericDialogIconBackgroundColor" format="color" />
-    <attr name="genericDialogIconTintColor" format="color" />
-    <attr name="genericDialogPositiveButtonColor" format="color" />
-    <attr name="genericDialogPositiveButtonTextColor" format="color" />
-    <attr name="genericDialogNegativeButtonColor" format="color" />
-    <attr name="genericDialogNegativeButtonTextColor" format="color" />
+
+
+    <style name="SessionLibTheme" parent="Theme.Session.Lib">
+        <item name="sessionLibBackground">@drawable/session_lib_window_background</item>
+        <item name="sessionLibSmallViewBackground">@drawable/session_lib_small_view_background</item>
+        <item name="sessionLibIconClose">@drawable/session_lib_close</item>
+        <item name="sessionLibIconLogo">@drawable/session_lib_app_logo</item>
+        <item name="sessionLibIconEndSession">@drawable/session_lib_icon_end_session</item>
+        <item name="sessionLibIconReward">@drawable/session_lib_icon_reward</item>
+        <item name="sessionLibIconMilestoneReward">?attr/sessionLibIconReward</item>
+        <item name="sessionLibIconLevelUp">@drawable/session_lib_level_up</item>
+        <item name="sessionLibIconNightSessionLevelUp">?attr/sessionLibIconLevelUp</item>
+        <item name="sessionLibIconRevenueEarnMore">@drawable/session_lib_double_revenue_earn_more</item>
+        <item name="sessionLibIconRevenueDownloadFeature">@drawable/session_lib_double_revenue_download_feature</item>
+        <item name="sessionLibIconRevenueReferralProgram">@drawable/session_lib_double_revenue_referral_program</item>
+
+        <item name="sessionLibSeparator">@drawable/session_lib_separator_dot</item>
+        <item name="sessionLibHighlightPrimaryColor">@color/sessionLibTextColorPrimary</item>
+        <item name="sessionLibHighlightSecondaryColor">@color/sessionLibTextColorPrimaryInverse</item>
+        <item name="sessionLibNightSessionBackground">@drawable/session_lib_night_session_background</item>
+        <item name="sessionLibNightSessionListBackground">@drawable/session_lib_night_session_list_background</item>
+        <item name="sessionLibNightSessionIconChargeUp">@drawable/session_lib_night_session_charge_up</item>
+        <item name="sessionLibNightSessionIconDoubleEarning">@drawable/session_lib_night_session_double_earning</item>
+        <item name="sessionLibHighlightBoldFontFamily">@font/session_lib_primary_font_bold</item>
+        <item name="sessionLibNewAppsListBackground">@drawable/session_lib_new_app_background</item>
+    </style>
+
+    <style name="Session.Lib.Theme" parent="SessionLibTheme"/>
+
+    <declare-styleable name="SessionLib">
+        <attr name="sessionLibBackground" format="reference|color" />
+        <attr name="sessionLibSmallViewBackground" format="reference|color" />
+        <attr name="sessionLibIconClose" format="reference" />
+        <attr name="sessionLibIconLogo" format="reference" />
+        <attr name="sessionLibIconEndSession" format="reference" />
+        <attr name="sessionLibIconReward" format="reference" />
+        <attr name="sessionLibIconMilestoneReward" format="reference" />
+        <attr name="sessionLibIconLevelUp" format="reference" />
+        <attr name="sessionLibIconNightSessionLevelUp" format="reference" />
+        <attr name="sessionLibIconRevenueEarnMore" format="reference" />
+        <attr name="sessionLibIconRevenueDownloadFeature" format="reference" />
+        <attr name="sessionLibIconRevenueReferralProgram" format="reference" />
+
+        <attr name="sessionLibSeparator" format="reference" />
+        <attr name="sessionLibNightSessionBackground" format="reference|color" />
+        <attr name="sessionLibHighlightPrimaryColor" format="color" />
+        <attr name="sessionLibHighlightSecondaryColor" format="color" />
+        <attr name="sessionLibNightSessionListBackground" format="reference|color" />
+        <attr name="sessionLibNightSessionIconChargeUp" format="reference|color" />
+        <attr name="sessionLibNightSessionIconDoubleEarning" format="reference|color" />
+        <attr name="sessionLibHighlightBoldFontFamily" format="reference" />
+        <attr name="sessionLibNewAppsListBackground" format="reference|color" />
+    </declare-styleable>
+
+
+
 </resources>

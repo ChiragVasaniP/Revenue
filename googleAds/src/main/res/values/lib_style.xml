@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SessionLibFontSecondaryBold">
+        <item name="android:fontFamily">@font/session_lib_secondary_font</item>
+        <item name="android:lineSpacingMultiplier">0.825</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SessionLibFontPrimaryMedium">
+        <item name="android:fontFamily">@font/session_lib_primary_font_medium</item>
+        <item name="android:lineSpacingMultiplier">0.825</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+
+    <style name="SessionLibFontSecondaryBold.Title" parent="SessionLibFontSecondaryBold">
+        <item name="android:textColor">@color/sessionLibTextColorPrimary</item>
+        <item name="android:textColorHint">@color/sessionLibTextColorHint</item>
+        <item name="android:shadowColor">@color/sessionLibTextColorShadow</item>
+        <item name="android:paddingStart">@dimen/_5sdp</item>
+        <item name="android:paddingEnd">@dimen/_5sdp</item>
+        <item name="android:textSize">@dimen/_35ssp</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+
+    <style name="SessionLibFontPrimaryMedium.TextColor.Primary" parent="SessionLibFontPrimaryMedium">
+        <item name="android:textColor">@color/sessionLibTextColorPrimary</item>
+        <item name="android:textColorHint">@color/sessionLibTextColorHint</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
+    </style>
+
+    <style name="SessionLibFontSecondaryBold.Sub.Title" parent="SessionLibFontSecondaryBold.Title">
+        <item name="android:textSize">@dimen/_22ssp</item>
+    </style>
+
+    <style name="SessionLibFontSecondaryBold.Field.Label" parent="SessionLibFontSecondaryBold.Title">
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+
+    <style name="Session.Lib.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minHeight">@dimen/_45sdp</item>
+        <item name="android:minWidth">@dimen/_125sdp</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
+        <item name="android:paddingTop">@dimen/_4sdp</item>
+        <item name="android:paddingBottom">@dimen/_7sdp</item>
+        <item name="android:paddingStart">@dimen/_20sdp</item>
+        <item name="android:paddingEnd">@dimen/_20sdp</item>
+        <item name="android:textColor">@color/sessionLibColorWhite</item>
+        <item name="android:fontFamily">@font/session_lib_secondary_font</item>
+        <item name="android:textStyle">bold</item>
+<!--        <item name="android:background">@drawable/session_lib_button_primary</item>-->
+<!--        <item name="android:shadowColor">@color/sessionLibTextColorShadow</item>-->
+        <item name="android:shadowRadius">4</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+<!--        <item name="backgroundTint">@null</item>-->
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+
+</resources>

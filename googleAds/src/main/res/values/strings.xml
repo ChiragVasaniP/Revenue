@@ -13,11 +13,13 @@
     <string name="admob_rewarded_interstitial_ad_id" translatable="false">ca-app-pub-3940256099942544/5354046379</string>
     <string name="admob_app_open_ad_id" translatable="false">ca-app-pub-3940256099942544/9257395921</string>
     <string name="google_app_id" translatable="false" >1:1062841038778:android:202ee79a23b33248ec8f83</string>
+    <string name="session_lib_ok">Okay</string>
+    <string name="session_lib_cancel">Cancel</string>
 
-<!--    <string name="google_app_id" translatable="false" >1:1062841038778:android:202ee79a23b33248ec8f83</string>
-    <string name="google_api_key" translatable="false">AIzaSyDeZ_HJI8Xo7I4I7EU8A5T2EVmuMZzFB9g</string>
-    <string name="gcm_defaultSenderId" translatable="false">1062841038778</string>
-    <string name="project_id" translatable="false">fir-chirag-projects</string>
-    <string name="google_storage_bucket" translatable="false">fir-chirag-projects.firebasestorage.app</string>-->
+    <!--    <string name="google_app_id" translatable="false" >1:1062841038778:android:202ee79a23b33248ec8f83</string>
+        <string name="google_api_key" translatable="false">AIzaSyDeZ_HJI8Xo7I4I7EU8A5T2EVmuMZzFB9g</string>
+        <string name="gcm_defaultSenderId" translatable="false">1062841038778</string>
+        <string name="project_id" translatable="false">fir-chirag-projects</string>
+        <string name="google_storage_bucket" translatable="false">fir-chirag-projects.firebasestorage.app</string>-->
 
 </resources>

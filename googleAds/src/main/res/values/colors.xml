@@ -3,5 +3,27 @@
 
     <color name="color_ffcc66">#FFCC66</color>
     <color name="blue">#0000FF</color>
+
+    <color name="sessionLibTextColorPrimary">#FFFFFF</color>
+    <color name="sessionLibTextColorPrimaryInverse">#FEB71A</color>
+    <color name="sessionLibTextColorSecondary">#EEF0F2</color>
+    <color name="sessionLibTextColorSecondaryInverse">#FFFFFF</color>
+    <color name="sessionLibTextColorShadow">#44000000</color>
+    <color name="sessionLibTextColorHint">#B3FFFFFF</color>
+
+    <color name="sessionLibTextColorGreyLight">#999999</color>
+    <color name="sessionLibTextColorGreyDark">#282828</color>
+
+    <color name="sessionLibColorTertiary">#FEB71A</color>
+    <color name="sessionLibColorTertiaryVariant">#ff480f</color>
+    <color name="sessionLibColorWhite">#FFFFFF</color>
+    <color name="sessionLibColorNightSessionMilestone">#CCCCCC</color>
+
+    <color name="colorShimmerDefaultForeground">#C0C0C0</color>
+    <color name="defaultThumbFilledColor">#000000</color>
+    <color name="defaultThumbUnfilledColor">#6F6F6F</color>
+    <color name="defaultTrackFilledColor">#000000</color>
+    <color name="defaultTrackUnfilledColor">#A9A9A9</color>
+    <color name="sessionLibColorGreen">#4CF657</color>
 </resources>
 

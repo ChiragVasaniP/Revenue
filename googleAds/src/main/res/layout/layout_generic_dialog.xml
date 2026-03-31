@@ -1,82 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:sessionLib="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="24dp"
-    style="@style/ThemeOverlay.GoogleAds.GenericDialog"
-    app:cardBackgroundColor="?attr/genericDialogSurfaceColor"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="10dp">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    sessionLib:background="?attr/sessionLibBackground"
+    sessionLib:theme="@style/Session.Lib.Theme"
+    sessionLib:visibility="visible">
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/blurView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:background="?attr/sessionLibBackground" />
 
-        <!-- Warning Icon -->
-        <FrameLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_circle_warning">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-            <ImageView
-                android:id="@+id/ivIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@android:drawable/ic_dialog_alert"
-                app:tint="?attr/genericDialogIconTintColor" />
-        </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:background="@drawable/session_lib_popup_background"
+            android:minHeight="@dimen/_250sdp"
+            android:padding="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonPositive"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tvTitle"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTitle"
+                style="@style/SessionLibFontSecondaryBold.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                sessionLib:text="@tools:sample/lorem"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtHeaderSubTitle"
+                style="@style/SessionLibFontPrimaryMedium.TextColor.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_9ssp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+                sessionLib:text="@tools:sample/lorem" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewIcon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="?attr/sessionLibIconLogo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtHeaderSubTitle"
+                app:layout_constraintVertical_chainStyle="packed"
+                sessionLib:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtSubTitle"
+                style="@style/SessionLibFontSecondaryBold.Sub.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewIcon"
+                sessionLib:text="@tools:sample/lorem" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtMessage"
+                style="@style/SessionLibFontPrimaryMedium.TextColor.Primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:minLines="4"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSubTitle"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_goneMarginTop="@dimen/_5sdp"
+                sessionLib:text="@tools:sample/lorem" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonPositive"
+            style="@style/Session.Lib.Button.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Delete this item?"
-            android:textColor="?attr/genericDialogTitleTextColor"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/session_lib_ok"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@+id/buttonNegative"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_goneMarginBottom="@dimen/_20sdp" />
 
-        <!-- Description -->
-        <TextView
-            android:id="@+id/tvDescription"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonNegative"
+            style="@style/Session.Lib.Button.Primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:text="This action is permanent and cannot be undone. All associated data will be removed from our servers immediately."
-            android:textColor="?attr/genericDialogDescriptionTextColor"
-            android:textSize="14sp" />
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/session_lib_cancel"
+            android:visibility="gone"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Delete Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPositive"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginBottom="12dp"
-            android:text="Delete"
-            android:textAllCaps="false"
-            android:textColor="?attr/genericDialogPositiveButtonTextColor"
-            app:backgroundTint="?attr/genericDialogPositiveButtonColor"
-            app:cornerRadius="28dp" />
-
-        <!-- Cancel Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNegative"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Cancel"
-            android:textAllCaps="false"
-            android:textColor="?attr/genericDialogNegativeButtonTextColor"
-            app:backgroundTint="?attr/genericDialogNegativeButtonColor"
-            app:cornerRadius="28dp" />
-
-    </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/buttonClose"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/sessionLibIconClose"
+            sessionLib:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

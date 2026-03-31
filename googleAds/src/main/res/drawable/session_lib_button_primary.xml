@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/session_lib_button_primary_disable" android:state_activated="true" />
+    <item android:drawable="@drawable/session_lib_button_primary_pressed" android:state_pressed="true" />
+    <item android:drawable="@drawable/session_lib_button_primary_pressed" android:state_hovered="true" />
+    <item android:drawable="@drawable/session_lib_button_primary_pressed" android:state_drag_hovered="true" />
+    <item android:drawable="@drawable/session_lib_button_primary_disable" android:state_enabled="false" />
+    <item android:drawable="@drawable/session_lib_button_primary_normal" />
+</selector>

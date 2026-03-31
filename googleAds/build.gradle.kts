@@ -73,4 +73,8 @@ dependencies {
 
     implementation ("com.google.android.gms:play-services-ads:24.8.0")
     implementation ("com.google.android.ump:user-messaging-platform:4.0.0")
+
+
+    implementation("com.intuit.sdp:sdp-android:1.1.1")
+    implementation("com.intuit.ssp:ssp-android:1.1.1")
 }
