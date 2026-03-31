@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.chirag.googleads"
-version = "v1.0.0-alpha13"
+version = "1.0.0"
 
 android {
     namespace = "com.chirag.googleads"
@@ -94,8 +94,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/ChiragVasaniP/chirag-monetization")
             credentials {
-                username = "ChiragVasaniP"
-                password = "jp_pqooocpkgf3lb6p9chgeakao0g"
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
             }
         }
     }
