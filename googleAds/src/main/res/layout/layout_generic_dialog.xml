@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    sessionLib:background="?attr/sessionLibBackground"
-    sessionLib:theme="@style/Session.Lib.Theme"
+    sessionLib:background="?attr/revenueLibBackground"
+    sessionLib:theme="@style/Chirag.Revenue.Lib.Theme"
     sessionLib:visibility="visible">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/blurView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/sessionLibBackground" />
+        android:background="?attr/revenueLibBackground" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutParent"
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
-            android:background="@drawable/session_lib_popup_background"
+            android:background="@drawable/chirag_revenue_lib_popup_background"
             android:minHeight="@dimen/_250sdp"
             android:padding="@dimen/_20sdp"
             app:layout_constraintBottom_toTopOf="@+id/buttonPositive"
@@ -69,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_140sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:src="?attr/sessionLibIconLogo"
+                android:src="?attr/revenueLibIconLogo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtHeaderSubTitle"
@@ -143,7 +143,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?attr/sessionLibIconClose"
+            app:srcCompat="?attr/revenueLibIconClose"
             sessionLib:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

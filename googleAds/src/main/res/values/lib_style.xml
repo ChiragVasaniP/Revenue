@@ -2,13 +2,13 @@
 <resources>
 
     <style name="SessionLibFontSecondaryBold">
-        <item name="android:fontFamily">@font/session_lib_secondary_font</item>
+        <item name="android:fontFamily">@font/chirag_revenue_lib_secondary_font</item>
         <item name="android:lineSpacingMultiplier">0.825</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="SessionLibFontPrimaryMedium">
-        <item name="android:fontFamily">@font/session_lib_primary_font_medium</item>
+        <item name="android:fontFamily">@font/chirag_revenue_lib_primary_font_medium</item>
         <item name="android:lineSpacingMultiplier">0.825</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -52,7 +52,7 @@
         <item name="android:paddingStart">@dimen/_20sdp</item>
         <item name="android:paddingEnd">@dimen/_20sdp</item>
         <item name="android:textColor">@color/sessionLibColorWhite</item>
-        <item name="android:fontFamily">@font/session_lib_secondary_font</item>
+        <item name="android:fontFamily">@font/chirag_revenue_lib_secondary_font</item>
         <item name="android:textStyle">bold</item>
 <!--        <item name="android:background">@drawable/session_lib_button_primary</item>-->
 <!--        <item name="android:shadowColor">@color/sessionLibTextColorShadow</item>-->

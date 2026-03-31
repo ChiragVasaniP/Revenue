@@ -1,25 +1,18 @@
 package com.chirag.googleads.util
 
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ContextThemeWrapper
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import com.chirag.googleads.R
-import com.chirag.googleads.databinding.LayoutGenericDialogBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 object GenericDialogHelper {
@@ -57,10 +50,10 @@ object GenericDialogHelper {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        dialog.window?.attributes?.windowAnimations = R.style.Session_Lib_Dialog_Animation
+        dialog.window?.attributes?.windowAnimations = R.style.Chirag_Revenue_Lib_Dialog_Animation
 
         val imageResource = if (imageRes == UNDEFINED_RES) {
-            getResourceFromAttribute(R.attr.sessionLibIconLogo)
+            getResourceFromAttribute(R.attr.revenueLibIconLogo)
         } else {
             imageRes
         }

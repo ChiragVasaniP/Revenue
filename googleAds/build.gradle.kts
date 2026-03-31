@@ -58,6 +58,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
+
     val composeBom = platform("androidx.compose:compose-bom:2025.05.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -71,10 +74,9 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-process:2.9.2")
     implementation ("androidx.multidex:multidex:2.0.1")
 
-    implementation ("com.google.android.gms:play-services-ads:24.8.0")
+    implementation ("com.google.android.gms:play-services-ads:25.1.0")
     implementation ("com.google.android.ump:user-messaging-platform:4.0.0")
 
 
-    implementation("com.intuit.sdp:sdp-android:1.1.1")
-    implementation("com.intuit.ssp:ssp-android:1.1.1")
+
 }
