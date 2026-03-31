@@ -2,8 +2,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
-
+    `maven-publish`
 }
+
+group = "com.chirag.googleads"
+version = "v1.0.0-alpha13"
 
 android {
     namespace = "com.chirag.googleads"
@@ -44,7 +47,14 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
+
 
 dependencies {
 
@@ -76,7 +86,24 @@ dependencies {
 
     implementation ("com.google.android.gms:play-services-ads:24.8.0")
     implementation ("com.google.android.ump:user-messaging-platform:4.0.0")
+}
 
-
-
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ChiragVasaniP/chirag-monetization")
+            credentials {
+                username = "ChiragVasaniP"
+                password = "jp_pqooocpkgf3lb6p9chgeakao0g"
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
