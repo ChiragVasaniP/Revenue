@@ -5,11 +5,13 @@ import android.app.Application
 import android.os.Bundle
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.chirag.googleads.adsUtil.AppOpenAdManager
 import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
 import com.chirag.googleads.event.Logger
 import com.chirag.googleads.localcache.PreferenceManager
-import java.util.concurrent.CopyOnWriteArrayList
 
 /**
  * Application Lifecycle Manager for Google Ads Module
@@ -42,21 +44,31 @@ class ApplicationLifecycleManagerOpenAds private constructor() {
     private var isAppInForeground = false
     private var activityCount = 0
     private var isInitialized = false
+
+    var currentActivity: Activity? = null
+
+
+    fun applicationIsInStart() {
+        currentActivity?.let {
+            appOpenAdManager.showAdIfAvailable(it)
+
+        }
+    }
     
     /**
      * Initialize the lifecycle manager with the application instance
      * Call this in your Application.onCreate()
      */
     fun initialize(application: Application) {
-        ApplicationLifecycleManager.getInstance().initialize(application)
         PreferenceManager.init(application)
-
-        var currentActivity: Activity? = null
 
         if (isInitialized) {
             Logger.w("chirag_lifecycle_", "ApplicationLifecycleManager already initialized")
             return
         }
+
+        ApplicationLifecycleManager.getInstance().initialize(application)
+        initizeApplicationProcess()
 
         appOpenAdManager = AppOpenAdManager(application)
         
@@ -104,6 +116,15 @@ class ApplicationLifecycleManagerOpenAds private constructor() {
         
         isInitialized = true
         Logger.i("chirag_lifecycle_", "ApplicationLifecycleManager initialized successfully")
+    }
+
+    private fun initizeApplicationProcess() {
+        ProcessLifecycleOwner.get().lifecycle.addObserver(object:DefaultLifecycleObserver{
+            override fun onStart(owner: LifecycleOwner) {
+                super.onStart(owner)
+                applicationIsInStart()
+            }
+        })
     }
 
     /**
