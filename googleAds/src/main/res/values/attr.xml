@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="customCardBackgroundColor" format="color" />
+    <attr name="customProgressColor" format="color" />
+    <attr name="customTrackColor" format="color" />
+    <attr name="customTextColor" format="color" />
+    <attr name="genericDialogThemeOverlay" format="reference" />
+    <attr name="genericDialogSurfaceColor" format="color" />
+    <attr name="genericDialogTitleTextColor" format="color" />
+    <attr name="genericDialogDescriptionTextColor" format="color" />
+    <attr name="genericDialogIconBackgroundColor" format="color" />
+    <attr name="genericDialogIconTintColor" format="color" />
+    <attr name="genericDialogPositiveButtonColor" format="color" />
+    <attr name="genericDialogPositiveButtonTextColor" format="color" />
+    <attr name="genericDialogNegativeButtonColor" format="color" />
+    <attr name="genericDialogNegativeButtonTextColor" format="color" />
+</resources>

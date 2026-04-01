@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
+
+    <application android:name=".MyApplication">
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <!--
+        Override Meta data value with your own AdMob App ID Like below Examole
+
+           <meta-data
+                    android:name="com.google.android.gms.ads.APPLICATION_ID"
+                    android:value="@string/admob_app_id"
+                    tools:replace="android:value" />
+        -->
+
+
+        <activity android:name=".LifecycleAwareAdsDemoActivity" />
+    </application>
+
+
+</manifest>

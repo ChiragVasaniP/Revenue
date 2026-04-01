@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Monetization" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="customCardBackgroundColor">#FFFFFF</item>
+        <item name="customTextColor">#000000</item>
+        <item name="customProgressColor">#6200EE</item>
+        <item name="customTrackColor">#DDDDDD</item>
+        <item name="genericDialogThemeOverlay">@style/ThemeOverlay.Monetization.GenericDialog</item>
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+
+
+    <style name="Theme.Monetization" parent="Base.Theme.Monetization" />
+
+    <style name="ThemeOverlay.Monetization.GenericDialog" parent="">
+        <item name="genericDialogThemeOverlay">@style/ThemeOverlay.GoogleAds.GenericDialog</item>
+        <item name="genericDialogSurfaceColor">#F8FAFC</item>
+        <item name="genericDialogTitleTextColor">#0F172A</item>
+        <item name="genericDialogDescriptionTextColor">#475569</item>
+        <item name="genericDialogIconBackgroundColor">#7F1D1D</item>
+        <item name="genericDialogPositiveButtonColor">#DC2626</item>
+        <item name="genericDialogPositiveButtonTextColor">@android:color/white</item>
+        <item name="genericDialogNegativeButtonColor">#E2E8F0</item>
+        <item name="genericDialogNegativeButtonTextColor">#0F172A</item>
+        <item name="genericDialogIconTintColor">@android:color/white</item>
+    </style>
+
+
+</resources>
