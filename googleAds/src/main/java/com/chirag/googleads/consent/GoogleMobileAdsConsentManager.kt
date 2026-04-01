@@ -3,7 +3,7 @@ package com.chirag.googleads.consent
 
 import android.app.Activity
 import android.content.Context
-import com.chirag.googleads.MyApplication
+import com.chirag.googleads.consent.AdConsentUtil.TEST_DEVICE_HASHED_ID
 import com.google.android.ump.ConsentDebugSettings
 import com.google.android.ump.ConsentForm.OnConsentFormDismissedListener
 import com.google.android.ump.ConsentInformation
@@ -47,7 +47,7 @@ internal class GoogleMobileAdsConsentManager private constructor(context: Contex
         val debugSettings =
             ConsentDebugSettings.Builder(activity)
                 // .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
-                .addTestDeviceHashedId(MyApplication.TEST_DEVICE_HASHED_ID)
+                .addTestDeviceHashedId(TEST_DEVICE_HASHED_ID)
                 .build()
 
         val params = ConsentRequestParameters.Builder().setConsentDebugSettings(debugSettings).build()
@@ -85,4 +85,7 @@ internal class GoogleMobileAdsConsentManager private constructor(context: Contex
                     instance ?: GoogleMobileAdsConsentManager(context).also { instance = it }
                 }
     }
+
+
+
 }

@@ -136,7 +136,7 @@ fun MyScreen() {
 
     getCurrentActivity()?.let {activity ->
         AdConsentUtil.gatherConsent(activity) { aBoolean: Boolean? ->
-            AdConsentUtil.loadOpenAppAds(activity)
+            AdsShowingClass.loadOpenAppAds(activity)
             if (AdConsentUtil.canRequestAds(activity)) {
                 Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
                     override fun run() {

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import com.chirag.googleads.event.Logger
 import android.widget.Toast
+import com.chirag.googleads.AdsShowingClass
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.consent.GoogleMobileAdsConsentManager
@@ -41,9 +42,6 @@ internal class AppOpenAdManager(applicationContext: Context) {
     /** Keep track of the time an app open ad is loaded to ensure you don't show an expired ad. */
     private var loadTime: Long = 0
 
-    fun loadAndShowAppOpenAds(context: Context,onShowAdCompleteListener: OnShowAdCompleteListener){
-
-    }
 
 
     /**
@@ -126,9 +124,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
             },
         )
     }
-    private fun canShowAds(activity: Activity): Boolean {
-        return LocalAdPrefHelper.isAdsEnabled(activity = activity) && AdConsentUtil.canRequestAds(activity)
-    }
+
     /**
      * Show the ad if one isn't already showing.
      *
@@ -142,7 +138,7 @@ internal class AppOpenAdManager(applicationContext: Context) {
             return
         }
 
-        if (canShowAds(activity).not()){
+        if (AdsShowingClass.canShowAds(activity).not()){
             Logger.d(LOG_TAG, "The app open ad is not ready yet Or condition.")
             onShowAdCompleteListener.onShowAdComplete()
             return

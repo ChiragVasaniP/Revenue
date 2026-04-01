@@ -1,13 +1,15 @@
 package com.dachiware.monetization
 
 import android.app.Application
-import com.chirag.googleads.MyApplication
 import com.chirag.googleads.base.ApplicationLifecycleManager
+import com.chirag.googleads.base.ApplicationLifecycleManagerOpenAds
+
 //import com.chirag.googleads.event.FirebaseInitializer
 
-class MyApp : MyApplication() {
+class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        ApplicationLifecycleManagerOpenAds.getInstance().initialize(this@MyApp)
 //        FirebaseInitializer.init(this)
 
         if (instance == null) {
@@ -15,6 +17,7 @@ class MyApp : MyApplication() {
         }
         // Initialize Application Lifecycle Manager
 //        ApplicationLifecycleManager.getInstance().initialize(this)
+
     }
 
 

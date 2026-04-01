@@ -6,8 +6,8 @@ import android.content.Context
 import com.chirag.googleads.event.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
-import com.chirag.googleads.MyApplication
 import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
+import com.chirag.googleads.base.ApplicationLifecycleManagerOpenAds
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicBoolean
     private fun initAdSdkIfNeeded(context: Context) {
         if (isInitialized.getAndSet(true)) return // Prevent re-initialization
         // Set test device IDs for debugging ads (optional)
-       val deviceTestId = listOf(MyApplication.TEST_DEVICE_HASHED_ID).takeIf { BuildConfig.DEBUG }?: LocalAdPrefHelper.getTestDeviceIds()
+       val deviceTestId = listOf(TEST_DEVICE_HASHED_ID).takeIf { BuildConfig.DEBUG }?: LocalAdPrefHelper.getTestDeviceIds()
 
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
@@ -50,16 +50,7 @@ import java.util.concurrent.atomic.AtomicBoolean
         Logger.d("AdUtil", "Ad SDK initialized.")
     }
 
-    fun loadOpenAppAds(context: Activity){
-        // Initialize Mobile Ads SDK on a background thread
-        if (canRequestAds(context)){
-            CoroutineScope(Dispatchers.Main).launch {
-                // Load the App Open Ad on the main thread
-                (context.applicationContext as? MyApplication)?.loadAd(context)
-            }
-        }
 
-    }
 
     /**
      * Gathers user consent using Google’s Consent SDK.
@@ -112,7 +103,9 @@ import java.util.concurrent.atomic.AtomicBoolean
      * @param onComplete Callback to continue app flow after ad
      */
     fun showAdIfAvailableAndThen(activity: Activity, onComplete: () -> Unit) {
-        (activity.application as? MyApplication)?.showAdIfAvailable(
+        val singleToneApplicationLifeCyel = ApplicationLifecycleManagerOpenAds.getInstance()
+
+        singleToneApplicationLifeCyel?.showAdIfAvailable(
             activity,
             object : OnShowAdCompleteListener {
                 override fun onShowAdComplete() {
@@ -142,6 +135,9 @@ import java.util.concurrent.atomic.AtomicBoolean
             error?.let { Logger.makeTextToast(context, it.message, Toast.LENGTH_SHORT) }
         }
     }
+
+    const val TEST_DEVICE_HASHED_ID = "94E478E0C133848F5605B6D42EE2640D"
+
 }
 
 

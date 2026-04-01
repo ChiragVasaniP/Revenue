@@ -8,9 +8,14 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.chirag.googleads.adsUtil.*
 import com.chirag.googleads.adsUtil.banner.BannerAdsUtil
+import com.chirag.googleads.base.ApplicationLifecycleManagerOpenAds
 import com.chirag.googleads.consent.AdConsentUtil
+import com.chirag.googleads.consent.AdConsentUtil.canRequestAds
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.rewarded.RewardItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @Keep
@@ -76,10 +81,23 @@ object AdsShowingClass {
         RewardedInterstitialAdUtil.loadAndShowAd(activity, onRewardEarned, onAdClosed)
     }
 
+    fun loadOpenAppAds(context: Activity) {
+        // Initialize Mobile Ads SDK on a background thread
+        val singleToneApplicationLifeCyel = ApplicationLifecycleManagerOpenAds.getInstance()
+        if (canRequestAds(context)) {
+            CoroutineScope(Dispatchers.Main).launch {
+                // Load the App Open Ad on the main thread
+                singleToneApplicationLifeCyel?.loadAd(context)
+            }
+        }
+
+    }
+
+
     /**
      * Checks whether ads are enabled and can be requested.
      */
-    private fun canShowAds(activity: Activity): Boolean {
+    internal fun canShowAds(activity: Activity): Boolean {
         return LocalAdPrefHelper.isAdsEnabled(activity = activity) && AdConsentUtil.canRequestAds(activity)
     }
 }

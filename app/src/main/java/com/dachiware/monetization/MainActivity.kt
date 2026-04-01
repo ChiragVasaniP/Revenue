@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.chirag.googleads.AdsShowingClass
 import com.chirag.googleads.LifecycleAwareAdsDemoActivity
 import com.chirag.googleads.consent.AdConsentUtil
 //import com.chirag.googleads.event.FirebaseInitializer
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         AdConsentUtil.gatherConsent(this@MainActivity) { aBoolean: Boolean? ->
             if (AdConsentUtil.canRequestAds(this@MainActivity)) {
-                AdConsentUtil.loadOpenAppAds(this@MainActivity)
+                AdsShowingClass.loadOpenAppAds(this@MainActivity)
                 Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
                     override fun run() {
                         AdConsentUtil.showAdIfAvailableAndThen(this@MainActivity) {
