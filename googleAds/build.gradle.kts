@@ -5,9 +5,6 @@ plugins {
     `maven-publish`
 }
 
-group = "com.chirag.googleads"
-version = "1.0.0"
-
 android {
     namespace = "com.chirag.googleads"
     compileSdk = 36
@@ -48,11 +45,6 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
 
@@ -88,22 +80,3 @@ dependencies {
     implementation ("com.google.android.ump:user-messaging-platform:4.0.0")
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/ChiragVasaniP/chirag-monetization")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
-            }
-        }
-    }
-    publications {
-        register<MavenPublication>("gpr") {
-            afterEvaluate {
-                from(components["release"])
-            }
-        }
-    }
-}
