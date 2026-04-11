@@ -39,29 +39,29 @@ internal object BannerAdsUtil {
 //        )
 
         // Initialize SDK only once
-        CoroutineScope(Dispatchers.Main).launch {
-            MobileAds.initialize(activity) {}
+//            MobileAds.initialize(activity) {}
 
             // Run UI-related actions on the main thread
-            activity.runOnUiThread {
-                val adView = AdView(activity).apply {
-                    adUnitId = BANNER_AD_UNIT_ID.takeIf { BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = activity) }?: LocalAdPrefHelper.getBannerAdId()
-                    setAdSize(
-                        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
-                            activity, adWidthPx
-                        )
+        activity.runOnUiThread {
+            val adView = AdView(activity).apply {
+                adUnitId = BANNER_AD_UNIT_ID.takeIf { BuildConfig.DEBUG || LocalAdPrefHelper.getIsDebugAds(activity = activity) }?: LocalAdPrefHelper.getBannerAdId(BANNER_AD_UNIT_ID)
+                setAdSize(
+                    AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+                        activity, adWidthPx
                     )
-                }
+                )
+            }
 
-                // Replace old ads if any
-                container.removeAllViews()
-                container.addView(adView)
+            // Replace old ads if any
+            container.removeAllViews()
+            container.addView(adView)
 
-                val adRequest = AdRequest.Builder().build()
-                adView.loadAd(adRequest)
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
+        }
+
 
                 Logger.d(TAG, "Banner Ad loaded in container.")
-            }
-        }
+
     }
 }

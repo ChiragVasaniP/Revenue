@@ -7,6 +7,12 @@
         <item name="customProgressColor">#6200EE</item>
         <item name="customTrackColor">#DDDDDD</item>
         <item name="genericDialogThemeOverlay">@style/ThemeOverlay.Monetization.GenericDialog</item>
+
+        <!-- Add missing attributes for googleAds library -->
+        <item name="revenueLibBackground">@drawable/chirag_revenue_lib_window_background</item>
+        <item name="revenueLibIconClose">@drawable/chirag_revenue_lib_close</item>
+        <item name="revenueLibIconLogo">@drawable/chirag_revenue_lib_app_logo</item>
+
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>

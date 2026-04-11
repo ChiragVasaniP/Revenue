@@ -99,15 +99,25 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
         val dialogButton = Button(this).apply {
             text = "Open Generic Dialog"
             setOnClickListener {
-//                createAlertDialog(
-//                    context = this@LifecycleAwareAdsDemoActivity,
-//                    title = "Demo Dialog",
-//                    description = "This is a generic dialog opened from LifecycleAwareAdsDemoActivity.",
-//                    positiveButtonText = "Close",
-//                    onPositiveClick = {
-//                        addEventLog("Dialog closed")
-//                    }
-//                )
+                createAlertDialog(
+                    title = "testing diaolog",
+                    subtitle = "Here is message for the Suggestion apps",
+                    message = "Please review our app",
+                    positiveRes =R.string.session_lib_ok,
+                    positiveClick = {
+
+                    },
+                    negativeRes = R.string.session_lib_cancel,
+                    negativeClick = {
+
+                    },
+                    cancelable = false,
+                    showClose = false,
+                    onCancel = {
+
+                    },
+                    imageRes = R.drawable.chirag_revenue_lib_close
+                ).show()
             }
         }
         buttonContainer.addView(dialogButton)

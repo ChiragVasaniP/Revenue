@@ -65,7 +65,7 @@ fun BannerAd(
     LaunchedEffect(Unit) {
         if (!isInPreview) {
             withContext(Dispatchers.Main) {
-                MobileAds.initialize(context) {}
+//                MobileAds.initialize(context) {}
             }
         }
     }
