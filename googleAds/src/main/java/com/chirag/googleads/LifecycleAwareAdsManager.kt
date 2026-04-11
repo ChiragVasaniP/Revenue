@@ -123,11 +123,11 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
     /**
      * Displays a banner ad with lifecycle awareness
      */
-    fun showBannerAds(activity: Activity, viewGroup: ViewGroup) {
+    fun showBannerAds(activity: Activity, viewGroup: ViewGroup, isNeedToUseCollapsible: Boolean = false) {
         if (!canShowAds(activity)) return
 
         Logger.d(TAG, "Showing banner ad in ${activity.javaClass.simpleName}")
-        BannerAdsUtil.showBannerAd(activity, container = viewGroup)
+        BannerAdsUtil.showBannerAd(activity, container = viewGroup, isNeedToUseCollapsible = isNeedToUseCollapsible)
     }
 
     /**
@@ -310,8 +310,8 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
      */
     object adManagerShow {
         @JvmStatic
-        fun showBannerAdsStatic(activity: Activity, viewGroup: ViewGroup) {
-            instanceLifecycle.getInstance().showBannerAds(activity, viewGroup)
+        fun showBannerAdsStatic(activity: Activity, viewGroup: ViewGroup, isNeedToUseCollapsible: Boolean = false) {
+            instanceLifecycle.getInstance().showBannerAds(activity, viewGroup, isNeedToUseCollapsible)
         }
 
         @JvmStatic
@@ -343,4 +343,4 @@ class LifecycleAwareAdsManager private constructor() : ApplicationLifecycleListe
                 .showRewardInterstitialAds(activity, onRewardEarned, onAdClosed)
         }
     }
-} 
+}

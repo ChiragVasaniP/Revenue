@@ -63,6 +63,12 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
             setOnClickListener { showBannerAd() }
         }
         buttonContainer.addView(bannerButton)
+
+        val collapSingBanner = Button(this).apply {
+            text = "Show collapsible Banner Ad"
+            setOnClickListener { showBannerAd(true) }
+        }
+        buttonContainer.addView(collapSingBanner)
         
         // Native Ad Button
         val nativeButton = Button(this).apply {
@@ -147,11 +153,11 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     
     // Demo ad methods
     
-    private fun showBannerAd() {
+    private fun showBannerAd(isNeedToUseCollapsible: Boolean = false) {
         addEventLog("Requesting Banner Ad")
         updateStatus("Loading Banner Ad...")
         
-        adsManager.showBannerAds(this, adsContainer)
+        adsManager.showBannerAds(this, adsContainer,isNeedToUseCollapsible)
         addEventLog("Banner Ad request sent")
         updateStatus("Banner Ad displayed")
     }

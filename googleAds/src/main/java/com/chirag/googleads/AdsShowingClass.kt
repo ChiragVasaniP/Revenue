@@ -25,9 +25,9 @@ object AdsShowingClass {
     /**
      * Displays a banner ad inside the given [viewGroup].
      */
-    fun showBannerAds(activity: Activity, viewGroup: ViewGroup) {
+    fun showBannerAds(activity: Activity, viewGroup: ViewGroup, isNeedToUseCollapsible: Boolean = false) {
         if (!canShowAds(activity)) return
-        BannerAdsUtil.showBannerAd(activity, container = viewGroup)
+        BannerAdsUtil.showBannerAd(activity, container = viewGroup, isNeedToUseCollapsible = isNeedToUseCollapsible)
     }
 
     /**
