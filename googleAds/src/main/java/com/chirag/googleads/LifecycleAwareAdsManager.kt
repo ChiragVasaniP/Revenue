@@ -1,14 +1,14 @@
 package com.chirag.googleads
 
 import android.app.Activity
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import android.view.ViewGroup
 import androidx.annotation.Keep
-import com.chirag.googleads.adsUtil.AdvanceNativeAdsUtil
-import com.chirag.googleads.adsUtil.banner.BannerAdsUtil
-import com.chirag.googleads.adsUtil.InterstitialAdUtil
-import com.chirag.googleads.adsUtil.RewardedAdUtil
-import com.chirag.googleads.adsUtil.RewardedInterstitialAdUtil
+import com.chirag.googleads.provider.google.AdvanceNativeAdsUtil
+import com.chirag.googleads.provider.google.banner.BannerAdsUtil
+import com.chirag.googleads.provider.google.InterstitialAdUtil
+import com.chirag.googleads.provider.google.RewardedAdUtil
+import com.chirag.googleads.provider.google.RewardedInterstitialAdUtil
 import com.chirag.googleads.base.ApplicationLifecycleListener
 import com.chirag.googleads.base.ApplicationLifecycleManager
 import com.chirag.googleads.consent.AdConsentUtil

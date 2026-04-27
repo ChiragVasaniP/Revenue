@@ -1,8 +1,8 @@
-package com.chirag.googleads.adsUtil
+package com.chirag.googleads.provider.google
 
 
 import android.app.Activity
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper

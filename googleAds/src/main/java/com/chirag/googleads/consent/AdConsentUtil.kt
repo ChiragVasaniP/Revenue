@@ -3,17 +3,14 @@ package com.chirag.googleads.consent
 
 import android.app.Activity
 import android.content.Context
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
-import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
+import com.chirag.googleads.provider.google.OnShowAdCompleteListener
 import com.chirag.googleads.base.ApplicationLifecycleManagerOpenAds
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**

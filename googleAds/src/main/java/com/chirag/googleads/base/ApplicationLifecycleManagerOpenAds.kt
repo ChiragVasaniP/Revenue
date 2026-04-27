@@ -8,9 +8,9 @@ import androidx.annotation.Nullable
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.chirag.googleads.adsUtil.AppOpenAdManager
-import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.provider.google.AppOpenAdManager
+import com.chirag.googleads.provider.google.OnShowAdCompleteListener
+import com.chirag.googleads.util.Logger
 import com.chirag.googleads.localcache.PreferenceManager
 
 /**

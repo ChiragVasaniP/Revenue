@@ -1,7 +1,7 @@
-package com.chirag.googleads.adsUtil
+package com.chirag.googleads.provider.google
 
 import android.app.Activity
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast

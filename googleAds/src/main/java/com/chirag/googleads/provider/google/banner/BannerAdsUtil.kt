@@ -1,19 +1,15 @@
-package com.chirag.googleads.adsUtil.banner
+package com.chirag.googleads.provider.google.banner
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.ViewGroup
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.localcache.LocalAdPrefHelper
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 internal object BannerAdsUtil {
     private const val TAG = "AdShowingUtil"

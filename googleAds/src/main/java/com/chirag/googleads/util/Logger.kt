@@ -1,11 +1,9 @@
-package com.chirag.googleads.event
+package com.chirag.googleads.util
 
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.chirag.googleads.BuildConfig
-import com.chirag.googleads.event.Logger.isLoggingEnabled
-
 
 /**
  * Internal Logger — used only within the library for debug messages.

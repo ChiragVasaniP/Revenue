@@ -1,18 +1,6 @@
 package com.chirag.googleads
 
 
-import android.app.Activity
-import android.app.Application
-import android.content.res.Resources
-import android.os.Bundle
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ProcessLifecycleOwner
-import androidx.multidex.MultiDex
-import com.chirag.googleads.adsUtil.AppOpenAdManager
-import com.chirag.googleads.adsUtil.OnShowAdCompleteListener
-import com.chirag.googleads.base.ApplicationLifecycleManager
-import com.chirag.googleads.localcache.PreferenceManager
 //import com.chirag.googleads.util.FirebaseResourcesWrapper
 
 

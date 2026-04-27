@@ -2,7 +2,7 @@ package com.chirag.googleads
 
 import android.os.Build
 import android.os.Bundle
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button

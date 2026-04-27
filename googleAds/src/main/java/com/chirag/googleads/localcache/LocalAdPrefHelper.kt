@@ -6,7 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.chirag.googleads.BuildConfig
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket

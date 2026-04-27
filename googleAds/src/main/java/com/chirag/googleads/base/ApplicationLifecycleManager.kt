@@ -5,7 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
-import com.chirag.googleads.event.Logger
+import com.chirag.googleads.util.Logger
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
