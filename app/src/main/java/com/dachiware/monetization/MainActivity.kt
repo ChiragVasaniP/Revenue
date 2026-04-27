@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.chirag.googleads.AdsShowingClass
+import com.chirag.googleads.manager.AdsShowingClass
 import com.chirag.googleads.LifecycleAwareAdsDemoActivity
 import com.chirag.googleads.consent.AdConsentUtil
 //import com.chirag.googleads.event.FirebaseInitializer

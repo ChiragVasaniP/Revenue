@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.view.View
-import com.chirag.googleads.AdsShowingClass
+import com.chirag.googleads.manager.AdsShowingClass
 import com.chirag.googleads.localcache.CLICK_TYPE
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 

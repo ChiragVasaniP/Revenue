@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import com.chirag.googleads.event.Logger
 import android.widget.Toast
-import com.chirag.googleads.AdsShowingClass
+import com.chirag.googleads.manager.AdsShowingClass
 import com.chirag.googleads.BuildConfig
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.consent.GoogleMobileAdsConsentManager

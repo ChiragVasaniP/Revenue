@@ -1,22 +1,20 @@
-package com.chirag.googleads
+package com.chirag.googleads.manager
 
 import android.app.Activity
-import android.app.Application
 import android.view.ViewGroup
 import androidx.annotation.Keep
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import com.chirag.googleads.adsUtil.*
+import com.chirag.googleads.adsUtil.AdvanceNativeAdsUtil
+import com.chirag.googleads.adsUtil.InterstitialAdUtil
+import com.chirag.googleads.adsUtil.RewardedAdUtil
+import com.chirag.googleads.adsUtil.RewardedInterstitialAdUtil
 import com.chirag.googleads.adsUtil.banner.BannerAdsUtil
 import com.chirag.googleads.base.ApplicationLifecycleManagerOpenAds
 import com.chirag.googleads.consent.AdConsentUtil
-import com.chirag.googleads.consent.AdConsentUtil.canRequestAds
 import com.chirag.googleads.localcache.LocalAdPrefHelper
 import com.google.android.gms.ads.rewarded.RewardItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 @Keep
 object AdsShowingClass {
@@ -83,8 +81,8 @@ object AdsShowingClass {
 
     fun loadOpenAppAds(context: Activity) {
         // Initialize Mobile Ads SDK on a background thread
-        val singleToneApplicationLifeCyel = ApplicationLifecycleManagerOpenAds.getInstance()
-        if (canRequestAds(context)) {
+        val singleToneApplicationLifeCyel = ApplicationLifecycleManagerOpenAds.Companion.getInstance()
+        if (AdConsentUtil.canRequestAds(context)) {
             CoroutineScope(Dispatchers.Main).launch {
                 // Load the App Open Ad on the main thread
                 singleToneApplicationLifeCyel?.loadAd(context)
