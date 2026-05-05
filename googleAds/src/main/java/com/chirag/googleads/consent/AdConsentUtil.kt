@@ -79,10 +79,19 @@ import java.util.concurrent.atomic.AtomicBoolean
         }
     }
 
-    /** First check userNeed to Show Privacy Policy in app siode
-     * googleMobileAdsConsentManager.isPrivacyOptionsRequired using below method
-     * */
-    fun isNeedToShowGooglePrivacyPolicyOption(activity: Activity) {
+    /**
+     * Helper variable to determine if the privacy options form is required.
+     * Check this before showing a "Privacy Settings" button.
+     */
+    fun isPrivacyOptionsRequired(context: Context): Boolean {
+        return GoogleMobileAdsConsentManager.getInstance(context).isPrivacyOptionsRequired
+    }
+
+    /** 
+     * Shows the Google Privacy Policy/Consent form.
+     * This allows users to revoke or change their consent.
+     */
+    fun showPrivacyOptionsForm(activity: Activity) {
         val consentManager = GoogleMobileAdsConsentManager.getInstance(activity.applicationContext)
 
         consentManager.showPrivacyOptionsForm(activity) { formError ->
@@ -90,6 +99,14 @@ import java.util.concurrent.atomic.AtomicBoolean
                 Logger.makeTextToast(activity, formError.message, Toast.LENGTH_SHORT)
             }
         }
+    }
+
+    /** 
+     * @deprecated Use [showPrivacyOptionsForm] instead.
+     */
+    @Deprecated("Renamed to showPrivacyOptionsForm", ReplaceWith("showPrivacyOptionsForm(activity)"))
+    fun isNeedToShowGooglePrivacyPolicyOption(activity: Activity) {
+        showPrivacyOptionsForm(activity)
     }
 
 
@@ -136,6 +153,3 @@ import java.util.concurrent.atomic.AtomicBoolean
     const val TEST_DEVICE_HASHED_ID = "94E478E0C133848F5605B6D42EE2640D"
 
 }
-
-
-

@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.util.GenericDialogHelper
 import com.chirag.googleads.util.GenericDialogHelper.createAlertDialog
 import com.chirag.googleads.util.OnOneOffClickListener
@@ -29,6 +30,7 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     private lateinit var eventLogTextView: TextView
     private lateinit var adsContainer: ViewGroup
     private lateinit var adsManager: LifecycleAwareAdsManager
+    private lateinit var privacySettingsButton: Button
     
     private val eventLog = StringBuilder()
     
@@ -57,6 +59,16 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     private fun setupDemoButtons() {
         val buttonContainer = findViewById<LinearLayout>(R.id.buttonContainer)
         
+        // Privacy Settings Button (Revocation Link requirement)
+        privacySettingsButton = Button(this).apply {
+            text = "Privacy Settings"
+            visibility = View.GONE // Hidden by default
+            setOnClickListener {
+                AdConsentUtil.showPrivacyOptionsForm(this@LifecycleAwareAdsDemoActivity)
+            }
+        }
+        buttonContainer.addView(privacySettingsButton)
+
         // Banner Ad Button
         val bannerButton = Button(this).apply {
             text = "Show Banner Ad"
@@ -213,6 +225,13 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
         Logger.i(TAG, "▶️ LifecycleAwareAdsDemoActivity resumed")
         addEventLog("Activity Resumed")
         updateStatus("Active")
+        
+        // Check if privacy options button should be shown
+        if (AdConsentUtil.isPrivacyOptionsRequired(this)) {
+            privacySettingsButton.visibility = View.VISIBLE
+        } else {
+            privacySettingsButton.visibility = View.GONE
+        }
         
         // Check ads manager status
         checkAdsManagerStatus()
