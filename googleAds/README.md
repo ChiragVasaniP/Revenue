@@ -121,6 +121,26 @@ AdConsentUtil.gatherConsent(this) { canRequestAds ->
 }
 ```
 
+#### Privacy Options (Consent Revocation Link)
+Google requires providing a way for users to revoke or change their consent at any time (e.g., a "Privacy Settings" button in your app's Settings menu).
+
+1. **Check if Privacy Button should be visible:**
+```kotlin
+// Only show the button if the SDK requires it (e.g., user is in GDPR region)
+if (AdConsentUtil.isPrivacyOptionsRequired(this)) {
+    privacyButton.visibility = View.VISIBLE
+} else {
+    privacyButton.visibility = View.GONE
+}
+```
+
+2. **Show the Consent Form when clicked:**
+```kotlin
+privacyButton.setOnClickListener {
+    AdConsentUtil.showPrivacyOptionsForm(this)
+}
+```
+
 ## Debugging
 - Use `LocalAdPrefHelper.enableAdsLogging(true)` to see detailed logs in Logcat under the tag `LifecycleAwareAds`.
-- The module includes a demo activity: `LifecycleAwareAdsDemoActivity` for testing all features.
+- The module includes a demo activity: `LifecycleAwareAdsDemoActivity` for testing all features, including the revocation link logic.
