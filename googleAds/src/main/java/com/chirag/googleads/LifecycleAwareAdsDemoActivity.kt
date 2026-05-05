@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import com.chirag.googleads.consent.AdConsentUtil
 import com.chirag.googleads.util.GenericDialogHelper
 import com.chirag.googleads.util.GenericDialogHelper.createAlertDialog
@@ -28,6 +29,7 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     
     private lateinit var statusTextView: TextView
     private lateinit var eventLogTextView: TextView
+    private lateinit var logScrollView: NestedScrollView
     private lateinit var adsContainer: ViewGroup
     private lateinit var adsManager: LifecycleAwareAdsManager
     private lateinit var privacySettingsButton: Button
@@ -48,6 +50,7 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
     private fun initializeViews() {
         statusTextView = findViewById(R.id.statusTextView)
         eventLogTextView = findViewById(R.id.eventLogTextView)
+        logScrollView = findViewById(R.id.logScrollView)
         adsContainer = findViewById(R.id.adsContainer)
         
         // Setup demo buttons
@@ -290,6 +293,11 @@ class LifecycleAwareAdsDemoActivity : AppCompatActivity() {
         }
         
         eventLogTextView.text = eventLog.toString()
+        
+        // Auto-scroll to top since new items are inserted at the beginning
+        logScrollView.post {
+            logScrollView.fullScroll(View.FOCUS_UP)
+        }
     }
     
     private fun clearEventLog() {
